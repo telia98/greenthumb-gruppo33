@@ -6,6 +6,7 @@ public class Prova {
 		int c;
 		int ktm;
 		int hoFame; 
+		int ok;
 	}
 
 }
