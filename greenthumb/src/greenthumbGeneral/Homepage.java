@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.imageio.ImageIO;
@@ -39,14 +41,13 @@ public class Homepage extends JPanel {
 		loginPanel= new JPanel();
 		loginPanel.setBackground(Color.WHITE);
 		
-		//elementi logoPanel
+		// inizio elementi logoPanel
 		JButton logo=new JButton();
 		
-		//qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
-		logo.setPreferredSize(new Dimension(250,250));
-		
+		logo.setPreferredSize(new Dimension(250,250)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
+
 		try {
-			Image logoImg=ImageIO.read(new File("/Users/teresaelia/git/greenthumb-gruppo33/greenthumb/img/logo.png"));
+			Image logoImg=ImageIO.read(new File("img/logo.png"));
 			logoImg=logoImg.getScaledInstance(80,80,Image.SCALE_SMOOTH);
 			ImageIcon icona=new ImageIcon(logoImg);
 			logo.setIcon(icona); 
@@ -61,32 +62,50 @@ public class Homepage extends JPanel {
 		logoPanel.add(new JLabel(""));
 		logoPanel.add(logo);
 		logoPanel.add(new JLabel(""));
+		// fine elementi logoPanel
 		
-		//elementi appNamePanel
+		//inizio elementi appNamePanel
 		JLabel appName=new JLabel("<html><center>GreenThumb</center></html>");
 		appName.setFont(fontBig);
 		appName.setForeground(new Color(45,174,0));
 		appName.setVisible(true);
 		appNamePanel.add(appName);
+		//fine elementi appNamePanel
 		
-		//elementi welcomePanel
+		//inizio elementi welcomePanel
 		JLabel welcome=new JLabel("<html><center> Benvenuto! <br></center><html>");
 		welcome.setFont(fontMedium);
 		welcome.setForeground(new Color(45,174,0)); //RGB colore verde del logo
 		welcomePanel.add(welcome);
+		//fine elementi welcomePanel
 		
-		//elementi infoPanel
+		//inizio elementi infoPanel
 		JLabel infoApp = new JLabel("<html><center>L'applicazione ti dà la possibilità di<br>gestire i tuoi impianti d'irrigazione,<br>monitorare le relative spese<br>e verificare lo stato delle tue colture.<br><br>Effettua il login per cominciare!<br><br><br><br></center></html>");
 		infoApp.setFont(font);
 		infoPanel.add(infoApp,BorderLayout.NORTH);
+		//fine elementi infoPanel
 		
-		//elementi loginPanel
+		//inizio elementi loginPanel
 		JButton login=new JButton("Login");
         login.setForeground(new Color(45,174,0));
 		login.setFont(fontMedium);
 		login.setFocusPainted(false); 
 		login.setVisible(true);
 		loginPanel.add(login);
+		
+		class LoginListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); //rendo invisibile il pannello della homepage
+				add(new Login()); //aggiungiamo al frame il pannello del login
+			}
+		}
+		
+		//collego il listener al bottone login
+		ActionListener loginListener=new LoginListener();
+		login.addActionListener(loginListener);
+		//fine elementi loginPanel
 		
 		//setting Jpanel schermata homepage
 		logoPanel.setVisible(true);
