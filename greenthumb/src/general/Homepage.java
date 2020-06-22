@@ -1,4 +1,4 @@
-package greenthumbGeneral;
+package general;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,6 +13,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -25,7 +26,7 @@ public class Homepage extends JPanel {
 	private JPanel infoPanel;
 	private JPanel loginPanel;
 	
-	public Homepage() {
+	public Homepage(JFrame frame) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 45);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 25);
 		Font font = new Font("Comic sans", Font.PLAIN, 13);
@@ -54,6 +55,7 @@ public class Homepage extends JPanel {
 			logo.setBorder(null); 
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
+			logo.invalidate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -98,7 +100,7 @@ public class Homepage extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false); //rendo invisibile il pannello della homepage
-				add(new Login()); //aggiungiamo al frame il pannello del login
+				frame.add(new Login(frame)); //aggiungiamo al frame il pannello del login
 			}
 		}
 		
