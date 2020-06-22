@@ -3,6 +3,7 @@ package general;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -91,7 +92,7 @@ public class Login extends JPanel {
 		//inizio elementi usernamePanel
 		JLabel username=new JLabel("<html><center>nome utente</center></html>");
 		username.setFont(font);
-		JTextField usernameInput=new JTextField("fabio34",10);
+		JTextField usernameInput=new JTextField("camilla_rossi",10);
 		usernameInput.setEditable(false);
 		usernamePanel.add(username);
 		usernamePanel.add(usernameInput);
@@ -141,5 +142,5 @@ public class Login extends JPanel {
 		add(passwordPanel);
 		add(loginPanel);
 		setVisible(true);
-	}
+	}    
 }
