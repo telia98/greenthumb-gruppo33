@@ -128,7 +128,7 @@ public class SelezioneImpianto extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>amministrazione</center></html>");
+		JLabel sectionName=new JLabel("<html><center>seleziona impianto</center></html>");
 		sectionName.setFont(fontBig);
 		sectionName.setForeground(new Color(0,138,177));
 		
