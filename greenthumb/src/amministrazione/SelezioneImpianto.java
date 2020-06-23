@@ -1,5 +1,6 @@
 package amministrazione;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -12,8 +13,10 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gestioneterreno.GestioneTerreno;
@@ -22,18 +25,18 @@ import general.Login;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
 
-public class Amministrazione extends JPanel {
+public class SelezioneImpianto extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
 	JPanel contenutoPanel; //contenuto della schermata
 	JPanel downBarPanel; //barra delle icone delle sezioni
-	JPanel emptyPanel;
 	JPanel imgPanel; //pannello per l'immagine della sezione
+	JPanel ComboPanel;
 	
 	
-	public Amministrazione(JFrame frame) {
+	public SelezioneImpianto(JFrame frame) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -47,10 +50,10 @@ public class Amministrazione extends JPanel {
 		contenutoPanel.setBackground(Color.WHITE);
 		downBarPanel=new JPanel();
 		downBarPanel.setBackground(Color.WHITE);
-		emptyPanel=new JPanel();
-		emptyPanel.setBackground(Color.WHITE);
 		imgPanel=new JPanel();
 		imgPanel.setBackground(Color.WHITE);
+		ComboPanel=new JPanel();
+		ComboPanel.setBackground(Color.WHITE);
 		
 		//inizio elementi upBarPanel
 		JButton logo=new JButton();		
@@ -133,47 +136,43 @@ public class Amministrazione extends JPanel {
 		nameSectionBarPanel.add(sectionName);
 		//fine elementi nameSectionBarPanel
 		
-		//inizio elementi imgPanel
-		JButton immagine=new JButton();
-		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
-
-		try {
-			Image img=ImageIO.read(new File("img/manoAcqua.png"));
-			img=img.getScaledInstance(75,75,Image.SCALE_SMOOTH);
-			ImageIcon iconaimg=new ImageIcon(img);
-			immagine.setIcon(iconaimg); 
-			immagine.setBorder(null); 
-			immagine.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			immagine.setVisible(true);
-			immagine.invalidate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		imgPanel.add(immagine);
-		//fine elementi imgPanel
 		
 		//inizio elementi contenutoPanel
-		JButton gotoAmministrazione=new JButton("VisualizzaSpeseImpianti   >");
-		gotoAmministrazione.setFocusPainted(false);
-		gotoAmministrazione.setForeground(new Color(230,202,60));
-		gotoAmministrazione.setBorder(null); 
-		gotoAmministrazione.setFont(font);
+		JLabel infoApp = new JLabel("<html><center>seleziona l'impianto<br>relativo al terreno<br>di cui desideri visualizzare le spese<br><br><br><br></center></html>");
+		infoApp.setFont(font);
+		contenutoPanel.add(infoApp,BorderLayout.NORTH);
+		//fine elementi contenutoPanel
 		
-		contenutoPanel.add(gotoAmministrazione);
+		//inizio elementi ComboPanel
+		JComboBox<String> listaimpianti= new JComboBox<String>();
+		listaimpianti.addItem("");
+		listaimpianti.addItem("impianto 1");
+		listaimpianti.addItem("impianto 2");
+		listaimpianti.setEditable(false);
+		ComboPanel.add(listaimpianti);
 		
-		class AmministrazioneListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new SelezioneImpianto(frame)); //aggiungiamo al frame il pannello della homepage
+		class ComboListener implements ActionListener{
+			public void actionPerformed(ActionEvent event) {
+				String op= (String) listaimpianti.getSelectedItem();
+				
+				if(op.contentEquals("impianto 1")) {
+					JOptionPane.showMessageDialog(null,"<html> Hai selezionato: <br>impianto 1</html", "Message", 1);
+					setVisible(false);
+					frame.add(new SelezioneImp1(frame));
+				}
+				if(op.contentEquals("impianto 2")) {
+					JOptionPane.showMessageDialog(null,"<html> Hai selezionato: <br>impianto 2</html", "Message", 1);
+					setVisible(false);
+					frame.add(new SelezioneImp2(frame));
+				}
+				
+				
 			}
 		}
 		
-		//collego il listener al bottone login
-		ActionListener amministrazioneListener=new AmministrazioneListener();
-		gotoAmministrazione.addActionListener(amministrazioneListener);
-		//fine elementi contenutoPanel
+		ActionListener listener= new ComboListener();
+		listaimpianti.addActionListener(listener);
+
 		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
@@ -274,7 +273,7 @@ public class Amministrazione extends JPanel {
 		upBarPanel.setVisible(true);
 		nameSectionBarPanel.setVisible(true);
 		contenutoPanel.setVisible(true);
-		emptyPanel.setVisible(true);
+		ComboPanel.setVisible(true);
 		downBarPanel.setVisible(true);
 		imgPanel.setVisible(true);
 		setLayout(new GridLayout(6,1));
@@ -282,8 +281,9 @@ public class Amministrazione extends JPanel {
 		add(nameSectionBarPanel);
 		add(imgPanel);
 		add(contenutoPanel);
-		add(emptyPanel);
+		add(ComboPanel);
 		add(downBarPanel);
 	}
 }
+
 
