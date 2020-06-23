@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -19,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import general.Homepage;
+import general.Tester;
+import utility.Impianto;
 
 public class SelezioneImpianto extends JPanel {
 	
@@ -139,9 +142,11 @@ public class SelezioneImpianto extends JPanel {
 		
 		//inizio elementi comboboxPanel
 		JComboBox<String> listaImpianti=new JComboBox<String>();
+		ArrayList<Impianto> lista=Tester.getImpianti();
 		listaImpianti.addItem(" ");
-		listaImpianti.addItem("impianto 1");
-		listaImpianti.addItem("impianto 2");
+		for(Impianto i: lista) {
+			listaImpianti.addItem(i.getNome());
+		}
 		listaImpianti.setEditable(false);
 		comboboxPanel.add(listaImpianti);
 		
@@ -150,18 +155,15 @@ public class SelezioneImpianto extends JPanel {
 			public void actionPerformed(ActionEvent event) {
 			
 				String op=(String) listaImpianti.getSelectedItem();
-				
-				if (op.equals("impianto 1")) {
-					JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 1</html>","Message",1);
-					setVisible(false);
-					frame.add(new VisualizzaProgrammiImpianto(frame,"impianto 1","programma 1"));
+				Impianto impianto=null;
+				JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>" + op + "</html>","Message",1);
+				setVisible(false);
+				for(Impianto i: lista) {
+					if (i.getNome().equals(op)) {
+						impianto=i;
+					}
 				}
-				
-				if (op.equals("impianto 2")) {
-					JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 2</html>","Message",1);
-					setVisible(false);
-					frame.add(new VisualizzaProgrammiImpianto(frame,"impianto 2","programma 1"));
-				}
+				frame.add(new VisualizzaProgrammiImpianto(frame,impianto,op));
 			}
 		}
 		ActionListener listener=new ComboListener();

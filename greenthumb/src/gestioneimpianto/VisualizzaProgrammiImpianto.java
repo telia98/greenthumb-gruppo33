@@ -21,6 +21,7 @@ import amministrazione.Amministrazione;
 import general.Homepage;
 import gestioneterreno.GestioneTerreno;
 import statopiante.StatoPiante;
+import utility.Impianto;
 
 public class VisualizzaProgrammiImpianto extends JPanel {
 
@@ -35,7 +36,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 	JPanel emptyPanel;
 	JPanel modificaPanel; //pannello per la modifica di un programma d'irrigazione
 	
-	public VisualizzaProgrammiImpianto(JFrame frame,String impianto,String programma) {
+	public VisualizzaProgrammiImpianto(JFrame frame,Impianto impianto,String programma) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
