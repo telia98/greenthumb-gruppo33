@@ -1,20 +1,28 @@
 package amministrazione;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import gestioneterreno.GestioneTerreno;
 import general.Homepage;
@@ -22,7 +30,7 @@ import general.Login;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
 
-public class Amministrazione extends JPanel {
+public class SegnaleVerdeImp1 extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
@@ -31,9 +39,10 @@ public class Amministrazione extends JPanel {
 	JPanel downBarPanel; //barra delle icone delle sezioni
 	JPanel emptyPanel;
 	JPanel imgPanel; //pannello per l'immagine della sezione
+	JPanel contenuto2Panel;
 	
 	
-	public Amministrazione(JFrame frame) {
+	public SegnaleVerdeImp1(JFrame frame) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -51,6 +60,8 @@ public class Amministrazione extends JPanel {
 		emptyPanel.setBackground(Color.WHITE);
 		imgPanel=new JPanel();
 		imgPanel.setBackground(Color.WHITE);
+		contenuto2Panel=new JPanel();
+		contenuto2Panel.setBackground(Color.WHITE);
 		
 		//inizio elementi upBarPanel
 		JButton logo=new JButton();		
@@ -125,7 +136,7 @@ public class Amministrazione extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>amministrazione</center></html>");
+		JLabel sectionName=new JLabel("<html><center>spese impianto 1</center></html>");
 		sectionName.setFont(fontBig);
 		sectionName.setForeground(new Color(0,138,177));
 		
@@ -134,46 +145,32 @@ public class Amministrazione extends JPanel {
 		//fine elementi nameSectionBarPanel
 		
 		//inizio elementi imgPanel
-		JButton immagine=new JButton();
-		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
-
-		try {
-			Image img=ImageIO.read(new File("img/manoSoldi.png"));
-			img=img.getScaledInstance(75,75,Image.SCALE_SMOOTH);
-			ImageIcon iconaimg=new ImageIcon(img);
-			immagine.setIcon(iconaimg); 
-			immagine.setBorder(null); 
-			immagine.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			immagine.setVisible(true);
-			immagine.invalidate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		imgPanel.add(immagine);
+		
 		//fine elementi imgPanel
 		
 		//inizio elementi contenutoPanel
-		JButton gotoAmministrazione=new JButton("VisualizzaSpeseImpianti   >");
-		gotoAmministrazione.setFocusPainted(false);
-		gotoAmministrazione.setForeground(new Color(230,202,60));
-		gotoAmministrazione.setBorder(null); 
-		gotoAmministrazione.setFont(font);
+		JLabel infoAppa = new JLabel("<html><center>BUDGET</center></html>");
+		infoAppa.setFont(font);
+		contenutoPanel.add(infoAppa,BorderLayout.NORTH);
 		
-		contenutoPanel.add(gotoAmministrazione);
+		JButton button1= new JButton("ON");
+		contenutoPanel.add(button1);
 		
-		class AmministrazioneListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new SelezioneImpianto(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		
-		//collego il listener al bottone login
-		ActionListener amministrazioneListener=new AmministrazioneListener();
-		gotoAmministrazione.addActionListener(amministrazioneListener);
+		button1.addActionListener(
+				new ActionListener() {
+			        public void actionPerformed(ActionEvent e) {
+			        	JOptionPane.showMessageDialog(null,"<html> parametro budget disattivato </html", "Message", 1);
+						setVisible(false);
+						frame.add(new SelezioneImp1(frame));
+			        }
+			    } 
+			);
 		//fine elementi contenutoPanel
+		
+		//inizio elementi contenuto2Panel
+		
+		
+
 		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
@@ -274,16 +271,24 @@ public class Amministrazione extends JPanel {
 		upBarPanel.setVisible(true);
 		nameSectionBarPanel.setVisible(true);
 		contenutoPanel.setVisible(true);
+		contenuto2Panel.setVisible(true);
 		emptyPanel.setVisible(true);
 		downBarPanel.setVisible(true);
 		imgPanel.setVisible(true);
-		setLayout(new GridLayout(6,1));
+		setLayout(new GridLayout(7,1));
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(imgPanel);
 		add(contenutoPanel);
+		add(contenuto2Panel);
 		add(emptyPanel);
 		add(downBarPanel);
 	}
+
+
+	
+
+
+	
 }
 

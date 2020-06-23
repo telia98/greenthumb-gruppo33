@@ -10,13 +10,17 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -35,6 +39,7 @@ public class SelezioneImp1 extends JPanel {
 	JPanel downBarPanel; //barra delle icone delle sezioni
 	JPanel emptyPanel;
 	JPanel imgPanel; //pannello per l'immagine della sezione
+	JPanel contenuto2Panel;
 	
 	
 	public SelezioneImp1(JFrame frame) {
@@ -55,6 +60,8 @@ public class SelezioneImp1 extends JPanel {
 		emptyPanel.setBackground(Color.WHITE);
 		imgPanel=new JPanel();
 		imgPanel.setBackground(Color.WHITE);
+		contenuto2Panel=new JPanel();
+		contenuto2Panel.setBackground(Color.WHITE);
 		
 		//inizio elementi upBarPanel
 		JButton logo=new JButton();		
@@ -129,7 +136,7 @@ public class SelezioneImp1 extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>amministrazione</center></html>");
+		JLabel sectionName=new JLabel("<html><center>spese impianto 1</center></html>");
 		sectionName.setFont(fontBig);
 		sectionName.setForeground(new Color(0,138,177));
 		
@@ -138,7 +145,7 @@ public class SelezioneImp1 extends JPanel {
 		//fine elementi nameSectionBarPanel
 		
 		//inizio elementi imgPanel
-		JLabel infoApp = new JLabel("<html><center>abilita l'operazioe<br>per stabilire un parametro<br>entro i quali i costi di irrigazione dovrebbero rientrare<br><br><br><br></center></html>");
+		JLabel infoApp = new JLabel("<html><center>abilita l'operazione<br>per stabilire un parametro<br>entro i quali i costi di irrigazione dovrebbero rientrare<br><br><br><br></center></html>");
 		infoApp.setFont(font);
 		imgPanel.add(infoApp,BorderLayout.NORTH);
 		//fine elementi imgPanel
@@ -147,7 +154,40 @@ public class SelezioneImp1 extends JPanel {
 		JLabel infoAppa = new JLabel("<html><center>BUDGET</center></html>");
 		infoAppa.setFont(font);
 		contenutoPanel.add(infoAppa,BorderLayout.NORTH);
+		
+		JButton button1= new JButton("OFF");
+		contenutoPanel.add(button1);
+		
+		button1.addActionListener(
+				new ActionListener() {
+			        public void actionPerformed(ActionEvent e) {
+			        	JOptionPane.showMessageDialog(null,"<html> parametro budget attivato </html", "Message", 1);
+						setVisible(false);
+						frame.add(new SpeseImp1(frame));
+			        }
+			    } 
+			);
 		//fine elementi contenutoPanel
+		
+		//inizio elementi contenuto2Panel
+		JLabel infoAppa2 = new JLabel("<html>cosa è il budget</html>");
+		infoAppa2.setFont(font);
+		contenuto2Panel.add(infoAppa2,BorderLayout.NORTH);
+		
+		JButton button= new JButton("?");
+		contenuto2Panel.add(button);
+		
+		button.addActionListener(
+			    new ActionListener() {
+			        public void actionPerformed(ActionEvent e) {
+			        	JOptionPane.showMessageDialog(null,"<html> PARAMETRO NUMERICO<br>entro il quale i costi di irrigazione devono rientrare</html", "Message", 1);
+						setVisible(true);
+						frame.add(new SelezioneImp1(frame));
+			        }
+			    }
+			);
+		
+
 		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
@@ -248,14 +288,16 @@ public class SelezioneImp1 extends JPanel {
 		upBarPanel.setVisible(true);
 		nameSectionBarPanel.setVisible(true);
 		contenutoPanel.setVisible(true);
+		contenuto2Panel.setVisible(true);
 		emptyPanel.setVisible(true);
 		downBarPanel.setVisible(true);
 		imgPanel.setVisible(true);
-		setLayout(new GridLayout(6,1));
+		setLayout(new GridLayout(7,1));
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(imgPanel);
 		add(contenutoPanel);
+		add(contenuto2Panel);
 		add(emptyPanel);
 		add(downBarPanel);
 	}
