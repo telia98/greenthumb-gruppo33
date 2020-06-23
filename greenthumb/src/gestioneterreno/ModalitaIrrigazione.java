@@ -7,6 +7,8 @@ public class ModalitaIrrigazione extends JPanel {
 	
 	public ModalitaIrrigazione (JFrame frame, String impianto) {
 		
+		int i=0; 
+		
 	}
 
 }
