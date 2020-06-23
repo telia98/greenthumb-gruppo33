@@ -1,6 +1,7 @@
 package statopiante;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -21,17 +22,16 @@ import general.Homepage;
 import gestioneimpianto.GestioneImpianto;
 import gestioneterreno.GestioneTerreno;
 
-public class StatoPiante extends JPanel {
+public class StatoPiante2 extends JPanel {
 	private static final long serialVersionUID = 1L;
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
-	JPanel contenutoPanel; //contenuto della schermata
+	JPanel statoCulturePanel; //contenuto della schermata
 	JPanel downBarPanel; //barra delle icone delle sezioni
-	JPanel emptyPanel;
-	JPanel empty2Panel;
+	JPanel consigliPanel; //sezione consigli
 	JPanel imgPanel; //pannello per l'immagine della sezione
-
-	public StatoPiante(JFrame frame) {
+	
+	public StatoPiante2(JFrame frame) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -41,14 +41,12 @@ public class StatoPiante extends JPanel {
 		upBarPanel.setBackground(Color.WHITE);
 		nameSectionBarPanel=new JPanel();
 		nameSectionBarPanel.setBackground(Color.WHITE);
-		contenutoPanel=new JPanel();
-		contenutoPanel.setBackground(Color.WHITE);
+		statoCulturePanel=new JPanel();
+		statoCulturePanel.setBackground(Color.WHITE);
 		downBarPanel=new JPanel();
 		downBarPanel.setBackground(Color.WHITE);
-		emptyPanel=new JPanel();
-		emptyPanel.setBackground(Color.WHITE);
-		empty2Panel=new JPanel();
-		empty2Panel.setBackground(Color.WHITE);
+		consigliPanel=new JPanel();
+		consigliPanel.setBackground(Color.WHITE);
 		imgPanel=new JPanel();
 		imgPanel.setBackground(Color.WHITE);
 		
@@ -125,9 +123,9 @@ public class StatoPiante extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>Stato Piante</center></html>");
+		JLabel sectionName=new JLabel("<html><center>Stato Attuale</center></html>");
 		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(96,202,92));
+		sectionName.setForeground(new Color(0,138,177));
 		
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
@@ -137,57 +135,9 @@ public class StatoPiante extends JPanel {
 		JButton immagine=new JButton();
 		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
 
-		try {
-			Image img=ImageIO.read(new File("img/manoPianta.png"));
-			img=img.getScaledInstance(75,75,Image.SCALE_SMOOTH);
-			ImageIcon iconaimg=new ImageIcon(img);
-			immagine.setIcon(iconaimg); 
-			immagine.setBorder(null); 
-			immagine.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			immagine.setVisible(true);
-			immagine.invalidate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		imgPanel.add(immagine);
 		//fine elementi imgPanel
 		
 		//inizio elementi contenutoPanel
-		JButton gotoStatoPiante=new JButton("Stato Attuale      >");
-		gotoStatoPiante.setFocusPainted(false);
-		gotoStatoPiante.setBorder(null); 
-		gotoStatoPiante.setFont(font);
-		gotoStatoPiante.setForeground(new Color(96,202,92));
-		JButton gotoAgrofarmaci=new JButton("Agrofarmaci      >");
-		gotoAgrofarmaci.setFocusPainted(false);
-		gotoAgrofarmaci.setBorder(null); 
-		gotoAgrofarmaci.setFont(font);
-		gotoAgrofarmaci.setForeground(new Color(96,202,92));
-		
-		contenutoPanel.add(gotoStatoPiante);
-		contenutoPanel.add(gotoAgrofarmaci);
-		
-		class StatoListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new SelezioneImpianto(frame));
-			}
-		}
-		ActionListener statoListener=new StatoListener();
-		gotoStatoPiante.addActionListener(statoListener);
-		
-		class AgroListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new ScegliImpianto(frame)); 
-			}
-		}
-		ActionListener agroListener=new AgroListener();
-		gotoAgrofarmaci.addActionListener(agroListener);
 		//fine elementi contenutoPanel
 		
 		//inizio elementi downBarPanel
@@ -299,19 +249,18 @@ public class StatoPiante extends JPanel {
 		
 		upBarPanel.setVisible(true);
 		nameSectionBarPanel.setVisible(true);
-		contenutoPanel.setVisible(true);
-		emptyPanel.setVisible(true);
-		empty2Panel.setVisible(true);
+		statoCulturePanel.setVisible(true);
+		consigliPanel.setVisible(true);
 		downBarPanel.setVisible(true);
 		imgPanel.setVisible(true);
 		setLayout(new GridLayout(7,1));
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(imgPanel);
-		add(contenutoPanel);
-		add(emptyPanel);
-		add(empty2Panel);
+		add(statoCulturePanel);
+		add(consigliPanel);
 		add(downBarPanel);
-		
+
 	}
+
 }

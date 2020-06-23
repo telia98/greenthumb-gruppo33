@@ -1,6 +1,7 @@
 package statopiante;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -12,8 +13,10 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import amministrazione.Amministrazione;
@@ -21,17 +24,17 @@ import general.Homepage;
 import gestioneimpianto.GestioneImpianto;
 import gestioneterreno.GestioneTerreno;
 
-public class StatoPiante extends JPanel {
+public class ScegliImpianto extends JPanel {
+
 	private static final long serialVersionUID = 1L;
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
 	JPanel contenutoPanel; //contenuto della schermata
 	JPanel downBarPanel; //barra delle icone delle sezioni
-	JPanel emptyPanel;
+	JPanel sezioneImpianto;
 	JPanel empty2Panel;
 	JPanel imgPanel; //pannello per l'immagine della sezione
-
-	public StatoPiante(JFrame frame) {
+	public ScegliImpianto (JFrame frame) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -45,8 +48,8 @@ public class StatoPiante extends JPanel {
 		contenutoPanel.setBackground(Color.WHITE);
 		downBarPanel=new JPanel();
 		downBarPanel.setBackground(Color.WHITE);
-		emptyPanel=new JPanel();
-		emptyPanel.setBackground(Color.WHITE);
+		sezioneImpianto=new JPanel();
+		sezioneImpianto.setBackground(Color.WHITE);
 		empty2Panel=new JPanel();
 		empty2Panel.setBackground(Color.WHITE);
 		imgPanel=new JPanel();
@@ -123,72 +126,64 @@ public class StatoPiante extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		//fine elementi upBarPanel
+			
+				//iniziocontenutoPanel
+				JLabel message=new JLabel("<html><center>Seleziona l'impianto che desideri.<br></center></html>");
+				contenutoPanel.add(message);
+				message.setForeground(new Color(96,202,92));
+				//fine contenutoPanel
+				
+				//inizio elementi infoPanel
+				JLabel message2=new JLabel("<html><center>Seleziona l'impianto di cui<br>vuoi aggiungere gli agrofarmaci</center></html>");
+				message2.setForeground(new Color(96,202,92));
+				contenutoPanel.add(message2);
+				//fine elementi infoPanel
+				
+				//inizio elementi comboboxPanel
+				JComboBox<String> listaImpianti=new JComboBox<String>();
+				listaImpianti.addItem(" ");
+				listaImpianti.addItem("impianto 1");
+				listaImpianti.addItem("impianto 2");
+				listaImpianti.setEditable(false);
+				sezioneImpianto.add(listaImpianti);
+				
+				
+				class ComboListener implements ActionListener {
+					
+					public void actionPerformed(ActionEvent event) {
+					
+						String op=(String) listaImpianti.getSelectedItem();
+						
+						if (op.equals("impianto 1")) {
+							JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 1</html>","Message",1);
+							setVisible(false);
+							frame.add(new Agrofarmaci(frame));
+						}
+						
+						if (op.equals("impianto 2")) {
+							JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 2</html>","Message",1);
+							setVisible(false);
+							frame.add(new Agrofarmaci(frame));
+						}
+					}
+				}
+				ActionListener listener=new ComboListener();
+				listaImpianti.addActionListener(listener);		
+				//fine elementi comboboxPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>Stato Piante</center></html>");
-		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(96,202,92));
+		JLabel sectionName1=new JLabel("<html><center>Scegli Impianto</center></html>");
+		sectionName1.setFont(fontBig);
+		sectionName1.setForeground(new Color(96,202,92));
 		
-		sectionName.setVisible(true);
-		nameSectionBarPanel.add(sectionName);
+		sectionName1.setVisible(true);
+		nameSectionBarPanel.add(sectionName1);
 		//fine elementi nameSectionBarPanel
 		
 		//inizio elementi imgPanel
 		JButton immagine=new JButton();
 		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
 
-		try {
-			Image img=ImageIO.read(new File("img/manoPianta.png"));
-			img=img.getScaledInstance(75,75,Image.SCALE_SMOOTH);
-			ImageIcon iconaimg=new ImageIcon(img);
-			immagine.setIcon(iconaimg); 
-			immagine.setBorder(null); 
-			immagine.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			immagine.setVisible(true);
-			immagine.invalidate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		imgPanel.add(immagine);
-		//fine elementi imgPanel
-		
-		//inizio elementi contenutoPanel
-		JButton gotoStatoPiante=new JButton("Stato Attuale      >");
-		gotoStatoPiante.setFocusPainted(false);
-		gotoStatoPiante.setBorder(null); 
-		gotoStatoPiante.setFont(font);
-		gotoStatoPiante.setForeground(new Color(96,202,92));
-		JButton gotoAgrofarmaci=new JButton("Agrofarmaci      >");
-		gotoAgrofarmaci.setFocusPainted(false);
-		gotoAgrofarmaci.setBorder(null); 
-		gotoAgrofarmaci.setFont(font);
-		gotoAgrofarmaci.setForeground(new Color(96,202,92));
-		
-		contenutoPanel.add(gotoStatoPiante);
-		contenutoPanel.add(gotoAgrofarmaci);
-		
-		class StatoListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new SelezioneImpianto(frame));
-			}
-		}
-		ActionListener statoListener=new StatoListener();
-		gotoStatoPiante.addActionListener(statoListener);
-		
-		class AgroListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new ScegliImpianto(frame)); 
-			}
-		}
-		ActionListener agroListener=new AgroListener();
-		gotoAgrofarmaci.addActionListener(agroListener);
-		//fine elementi contenutoPanel
 		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
@@ -300,7 +295,7 @@ public class StatoPiante extends JPanel {
 		upBarPanel.setVisible(true);
 		nameSectionBarPanel.setVisible(true);
 		contenutoPanel.setVisible(true);
-		emptyPanel.setVisible(true);
+		sezioneImpianto.setVisible(true);
 		empty2Panel.setVisible(true);
 		downBarPanel.setVisible(true);
 		imgPanel.setVisible(true);
@@ -309,9 +304,9 @@ public class StatoPiante extends JPanel {
 		add(nameSectionBarPanel);
 		add(imgPanel);
 		add(contenutoPanel);
-		add(emptyPanel);
+		add(sezioneImpianto);
 		add(empty2Panel);
 		add(downBarPanel);
-		
 	}
+
 }
