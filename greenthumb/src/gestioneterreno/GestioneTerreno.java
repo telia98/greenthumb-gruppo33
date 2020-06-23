@@ -31,6 +31,7 @@ public class GestioneTerreno extends JPanel {
 	JPanel downBarPanel; //barra delle icone delle sezioni
 	JPanel emptyPanel;
 	JPanel empty2Panel;
+	JPanel emptyPanel3; // panel vuoto
 	JPanel imgPanel; //pannello per l'immagine della sezione
 	
 	public GestioneTerreno(JFrame frame) {
@@ -47,10 +48,12 @@ public class GestioneTerreno extends JPanel {
 		contenutoPanel.setBackground(Color.WHITE);
 		downBarPanel=new JPanel();
 		downBarPanel.setBackground(Color.WHITE);
-		emptyPanel=new JPanel();
-		emptyPanel.setBackground(Color.WHITE);
 		empty2Panel=new JPanel();
 		empty2Panel.setBackground(Color.WHITE);
+		
+		emptyPanel3= new JPanel();
+		emptyPanel3.setBackground(Color.WHITE);
+		
 		imgPanel=new JPanel();
 		imgPanel.setBackground(Color.WHITE);
 		
@@ -155,6 +158,28 @@ public class GestioneTerreno extends JPanel {
 		//fine elementi imgPanel
 		
 		//inizio elementi contenutoPanel
+		JButton gestioneIrrigazione=new JButton("Gestione irrigazione   >");
+		gestioneIrrigazione.setFocusPainted(false);
+		gestioneIrrigazione.setForeground(new Color(0,138,177));
+		gestioneIrrigazione.setBorder(null); 
+		gestioneIrrigazione.setFont(font);
+		
+		contenutoPanel.add(gestioneIrrigazione); 
+		
+		class GestioneIrrigazioneListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false); 
+				frame.add(new SelezionaImpiantoGT(frame)); 
+			}
+		}
+		
+		//collego il listener al bottone 
+		ActionListener gestioneIrrigazioneListener=new GestioneIrrigazioneListener();
+		gestioneIrrigazione.addActionListener(gestioneIrrigazioneListener);
+		
+
 		//fine elementi contenutoPanel
 		
 		//inizio elementi downBarPanel
@@ -267,16 +292,22 @@ public class GestioneTerreno extends JPanel {
 		upBarPanel.setVisible(true);
 		nameSectionBarPanel.setVisible(true);
 		contenutoPanel.setVisible(true);
-		emptyPanel.setVisible(true);
 		empty2Panel.setVisible(true);
+		
+		emptyPanel3.setVisible(true);
+		
 		downBarPanel.setVisible(true);
 		imgPanel.setVisible(true);
+		
 		setLayout(new GridLayout(7,1));
+		
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(imgPanel);
+		
+		add(emptyPanel3);
+		
 		add(contenutoPanel);
-		add(emptyPanel);
 		add(empty2Panel);
 		add(downBarPanel);
 	}
