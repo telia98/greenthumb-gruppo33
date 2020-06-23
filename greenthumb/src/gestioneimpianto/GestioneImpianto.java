@@ -55,15 +55,14 @@ public class GestioneImpianto extends JPanel {
 		
 		//inizio elementi upBarPanel
 		JButton logo=new JButton();		
-		logo.setPreferredSize(new Dimension(100,100)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adatterà
+		logo.setPreferredSize(new Dimension(100,100)); 
 		JButton exit=new JButton();
-		exit.setPreferredSize(new Dimension(90,90)); //qui puoi settare le dimensioni del tuo pulsante, la foto si adatterà
+		exit.setPreferredSize(new Dimension(90,90));
 
 		JLabel appName=new JLabel("<html><center>GreenThumb</center></html>");
 		appName.setFont(fontSmall);
 		appName.setForeground(new Color(45,174,0));
 		appName.setVisible(true);
-		
 		try {
 			//recupero immagine del logo
 			Image logoImg=ImageIO.read(new File("img/logo.png"));
@@ -71,7 +70,7 @@ public class GestioneImpianto extends JPanel {
 			ImageIcon icona=new ImageIcon(logoImg);
 			logo.setIcon(icona); 
 			logo.setBorder(null); 
-			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+			logo.setFocusPainted(false);
 			logo.setVisible(true);
 			logo.invalidate();
 			
@@ -81,19 +80,17 @@ public class GestioneImpianto extends JPanel {
 			ImageIcon exitIcon=new ImageIcon(exitImg);
 			exit.setIcon(exitIcon); 
 			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+			exit.setFocusPainted(false);
 			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
 		class ExitListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				setVisible(false); 
+				frame.add(new Homepage(frame));
 			}
 		}
 		ActionListener exitListener=new ExitListener();
@@ -103,16 +100,14 @@ public class GestioneImpianto extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				setVisible(false);
+				frame.add(new Homepage(frame));
 			}
 		}
-		
-		//collego il listener al bottone login
 		ActionListener logoListener=new LogoListener();
 		logo.addActionListener(logoListener);
 		
-		upBarPanel.setLayout(new GridLayout(2,5)); //1 riga, 3 colonne
+		upBarPanel.setLayout(new GridLayout(2,5));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
@@ -129,21 +124,19 @@ public class GestioneImpianto extends JPanel {
 		JLabel sectionName=new JLabel("<html><center>gestione impianto</center></html>");
 		sectionName.setFont(fontBig);
 		sectionName.setForeground(new Color(89,105,109));
-		
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
 		//fine elementi nameSectionBarPanel
 		
 		//inizio elementi imgPanel
 		JButton immagine=new JButton();
-		
 		try {
 			Image img=ImageIO.read(new File("img/manoImpianto.png"));
 			img=img.getScaledInstance(75,75,Image.SCALE_SMOOTH);
 			ImageIcon iconaimg=new ImageIcon(img);
 			immagine.setIcon(iconaimg); 
 			immagine.setBorder(null); 
-			immagine.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+			immagine.setFocusPainted(false);
 			immagine.setVisible(true);
 			immagine.invalidate();
 		} catch(Exception e) {
@@ -161,7 +154,6 @@ public class GestioneImpianto extends JPanel {
 		gotoAggiungiImpianti.setFocusPainted(false);
 		gotoAggiungiImpianti.setBorder(null); 
 		gotoAggiungiImpianti.setFont(font);
-		
 		contenutoPanel.add(gotoVisualizzaPiani);
 		contenutoPanel.add(gotoAggiungiImpianti);
 		
@@ -197,7 +189,6 @@ public class GestioneImpianto extends JPanel {
 		statoPiante.setPreferredSize(new Dimension(150,200));
 		JButton gestioneImpianto=new JButton();
 		gestioneImpianto.setPreferredSize(new Dimension(150,200));
-		
 		try {
 			//recupero immagine amministrazione
 			Image soldiImg=ImageIO.read(new File("img/adminLogo.png"));
@@ -205,7 +196,7 @@ public class GestioneImpianto extends JPanel {
 			ImageIcon icona=new ImageIcon(soldiImg);
 			amministrazione.setIcon(icona); 
 			amministrazione.setBorder(null); 
-			amministrazione.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+			amministrazione.setFocusPainted(false); 
 			amministrazione.setVisible(true);
 			
 			//recupero immagine gestione terreno
@@ -214,7 +205,7 @@ public class GestioneImpianto extends JPanel {
 			ImageIcon icona2=new ImageIcon(gocciaImg);
 			gestioneTerreno.setIcon(icona2); 
 			gestioneTerreno.setBorder(null); 
-			gestioneTerreno.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+			gestioneTerreno.setFocusPainted(false);
 			gestioneTerreno.setVisible(true);
 			
 			//recupero immagine stato piante
@@ -232,19 +223,17 @@ public class GestioneImpianto extends JPanel {
 			ImageIcon icona4=new ImageIcon(attrezzoImg);
 			gestioneImpianto.setIcon(icona4); 
 			gestioneImpianto.setBorder(null); 
-			gestioneImpianto.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+			gestioneImpianto.setFocusPainted(false);
 			gestioneImpianto.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
 		class AmministrazioneListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello della homepage
-				frame.add(new Amministrazione(frame)); //aggiungiamo al frame il pannello del login
+				setVisible(false); 
+				frame.add(new Amministrazione(frame)); 
 			}
 		}
 		ActionListener amministrazioneListener=new AmministrazioneListener();
@@ -254,8 +243,8 @@ public class GestioneImpianto extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello della homepage
-				frame.add(new GestioneTerreno(frame)); //aggiungiamo al frame il pannello del login
+				setVisible(false);
+				frame.add(new GestioneTerreno(frame));
 			}
 		}
 		ActionListener terrenoListener=new TerrenoListener();
@@ -265,8 +254,8 @@ public class GestioneImpianto extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello della homepage
-				frame.add(new StatoPiante(frame)); //aggiungiamo al frame il pannello del login
+				setVisible(false); 
+				frame.add(new StatoPiante(frame));
 			}
 		}
 		ActionListener pianteListener=new PianteListener();
@@ -276,8 +265,8 @@ public class GestioneImpianto extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello della homepage
-				frame.add(new GestioneImpianto(frame)); //aggiungiamo al frame il pannello del login
+				setVisible(false);
+				frame.add(new GestioneImpianto(frame));
 			}
 		}
 		ActionListener impiantoListener=new ImpiantoListener();

@@ -29,7 +29,6 @@ public class SelezioneImpianto extends JPanel {
 	JPanel downBarPanel; //barra delle icone delle sezioni
 	JPanel comboboxPanel; //combo box per la selezione di un impianto dalla lista
 	JPanel emptyPanel;
-	JPanel empty3Panel;
 	JPanel infoPanel;
 	
 	public SelezioneImpianto(JFrame frame) {
@@ -46,8 +45,6 @@ public class SelezioneImpianto extends JPanel {
 		downBarPanel.setBackground(Color.WHITE);
 		emptyPanel=new JPanel();
 		emptyPanel.setBackground(Color.WHITE);
-		empty3Panel=new JPanel();
-		empty3Panel.setBackground(Color.WHITE);
 		comboboxPanel=new JPanel();
 		comboboxPanel.setBackground(Color.WHITE);
 		infoPanel=new JPanel();
@@ -55,9 +52,9 @@ public class SelezioneImpianto extends JPanel {
 		
 		//inizio elementi upBarPanel
 		JButton logo=new JButton();		
-		logo.setPreferredSize(new Dimension(100,100)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adatterà
+		logo.setPreferredSize(new Dimension(100,100)); 
 		JButton exit=new JButton();
-		exit.setPreferredSize(new Dimension(90,90)); //qui puoi settare le dimensioni del tuo pulsante, la foto si adatterà
+		exit.setPreferredSize(new Dimension(90,90));
 
 		JLabel appName=new JLabel("<html><center>GreenThumb</center></html>");
 		appName.setFont(fontSmall);
@@ -71,7 +68,7 @@ public class SelezioneImpianto extends JPanel {
 			ImageIcon icona=new ImageIcon(logoImg);
 			logo.setIcon(icona); 
 			logo.setBorder(null); 
-			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+			logo.setFocusPainted(false);
 			logo.setVisible(true);
 			logo.invalidate();
 			
@@ -81,19 +78,17 @@ public class SelezioneImpianto extends JPanel {
 			ImageIcon exitIcon=new ImageIcon(exitImg);
 			exit.setIcon(exitIcon); 
 			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+			exit.setFocusPainted(false);
 			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		
-		//action listener per i bottoni
+		}	
 		class ExitListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				setVisible(false);
+				frame.add(new Homepage(frame));
 			}
 		}
 		ActionListener exitListener=new ExitListener();
@@ -103,16 +98,14 @@ public class SelezioneImpianto extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				setVisible(false);
+				frame.add(new Homepage(frame));
 			}
 		}
-		
-		//collego il listener al bottone login
 		ActionListener logoListener=new LogoListener();
 		logo.addActionListener(logoListener);
 		
-		upBarPanel.setLayout(new GridLayout(2,5)); //1 riga, 3 colonne
+		upBarPanel.setLayout(new GridLayout(2,5));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
@@ -161,13 +154,13 @@ public class SelezioneImpianto extends JPanel {
 				if (op.equals("impianto 1")) {
 					JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 1</html>","Message",1);
 					setVisible(false);
-					frame.add(new VisualizzaProgrammiImpianto(frame,"impianto 1"));
+					frame.add(new VisualizzaProgrammiImpianto(frame,"impianto 1","programma 1"));
 				}
 				
 				if (op.equals("impianto 2")) {
 					JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 2</html>","Message",1);
 					setVisible(false);
-					frame.add(new VisualizzaProgrammiImpianto(frame,"impianto 2"));
+					frame.add(new VisualizzaProgrammiImpianto(frame,"impianto 2","programma 1"));
 				}
 			}
 		}
@@ -179,19 +172,17 @@ public class SelezioneImpianto extends JPanel {
 		nameSectionBarPanel.setVisible(true);
 		contenutoPanel.setVisible(true);
 		emptyPanel.setVisible(true);
-		empty3Panel.setVisible(true);
 		downBarPanel.setVisible(true);
 		comboboxPanel.setVisible(true);
 		infoPanel.setVisible(true);
 		
-		setLayout(new GridLayout(8,1));
+		setLayout(new GridLayout(7,1));
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(contenutoPanel);
 		add(infoPanel);
 		add(comboboxPanel);
 		add(emptyPanel);
-		add(empty3Panel);
 		add(downBarPanel);
 	}
 }
