@@ -35,7 +35,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 	JPanel emptyPanel;
 	JPanel modificaPanel; //pannello per la modifica di un programma d'irrigazione
 	
-	public VisualizzaProgrammiImpianto(JFrame frame,String impianto) {
+	public VisualizzaProgrammiImpianto(JFrame frame,String impianto,String programma) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -65,12 +65,11 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		logo.setPreferredSize(new Dimension(100,100));
 		JButton exit=new JButton();
 		exit.setPreferredSize(new Dimension(90,90));
-
 		JLabel appName=new JLabel("<html><center>GreenThumb</center></html>");
 		appName.setFont(fontSmall);
 		appName.setForeground(new Color(45,174,0));
 		appName.setVisible(true);
-		
+
 		try {
 			//recupero immagine del logo
 			Image logoImg=ImageIO.read(new File("img/logo.png"));
@@ -93,8 +92,6 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
 		class ExitListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
@@ -117,7 +114,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		ActionListener logoListener=new LogoListener();
 		logo.addActionListener(logoListener);
 		
-		upBarPanel.setLayout(new GridLayout(2,5)); //1 riga, 3 colonne
+		upBarPanel.setLayout(new GridLayout(2,5));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
@@ -146,7 +143,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		//fine elementi infoPanel
 		
 		//inizio elementi programmiPanel
-		JLabel programma=new JLabel("Programma selezionato: ");
+		JLabel selection=new JLabel("Programma selezionato: ");
 		JComboBox<String> comboprogrammi=new JComboBox<String>();
 		comboprogrammi.addItem("programma 1");
 		comboprogrammi.addItem("programma 2");
@@ -158,19 +155,19 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 				
 				if (op.equals("programma 1")) {
 					setVisible(false);
-					frame.add(new VisualizzaProgrammiImpianto(frame,"impianto 1"));
+					frame.add(new VisualizzaProgrammiImpianto(frame,impianto,"programma 1"));
 				}
 				
-				if (op.equals("impianto 2")) {
+				if (op.equals("programma 2")) {
 					setVisible(false);
-					frame.add(new VisualizzaProgrammiImpianto(frame,"impianto 2"));
+					frame.add(new VisualizzaProgrammiImpianto(frame,impianto,"programma 2"));
 				}
 			}
 		}
 		ActionListener listener=new ComboListener();
 		comboprogrammi.addActionListener(listener);	
 		
-		programmiPanel.add(programma);
+		programmiPanel.add(selection);
 		programmiPanel.add(comboprogrammi);
 		//fine elementi programmiPanel
 		
@@ -257,7 +254,6 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 			e.printStackTrace();
 		}
 		
-		//action listener per i bottoni
 		class AmministrazioneListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
