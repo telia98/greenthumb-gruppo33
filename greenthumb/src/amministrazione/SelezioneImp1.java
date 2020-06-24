@@ -1,5 +1,6 @@
 package amministrazione;
 
+import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -42,11 +43,12 @@ public class SelezioneImp1 extends JPanel {
 	JPanel contenuto2Panel;
 	
 	
-	public SelezioneImp1(JFrame frame) {
+	public SelezioneImp1(JFrame frame, Impianto impianto) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
 		Font font = new Font("Comic sans", Font.PLAIN, 13);
+		
 		
 		upBarPanel=new JPanel();
 		upBarPanel.setBackground(Color.WHITE);
@@ -164,7 +166,7 @@ public class SelezioneImp1 extends JPanel {
 			        public void actionPerformed(ActionEvent e) {
 			        	JOptionPane.showMessageDialog(null,"<html> parametro budget attivato </html", "Message", 1);
 						setVisible(false);
-						frame.add(new SpeseImp1(frame));
+						frame.add(new SpeseImp1(frame, impianto));
 			        }
 			    } 
 			);
@@ -184,7 +186,7 @@ public class SelezioneImp1 extends JPanel {
 			        public void actionPerformed(ActionEvent e) {
 			        	JOptionPane.showMessageDialog(null,"<html> PARAMETRO NUMERICO<br>entro il quale i costi di irrigazione devono rientrare</html", "Message", 1);
 						setVisible(true);
-						frame.add(new SelezioneImp1(frame));
+						frame.add(new SelezioneImp1(frame, impianto));
 			        }
 			    }
 			);

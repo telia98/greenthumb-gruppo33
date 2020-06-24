@@ -1,5 +1,6 @@
 package amministrazione;
 
+import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -41,7 +42,7 @@ public class SegnaleRossoImp1 extends JPanel {
 	JPanel imgPanel; //pannello per l'immagine della sezione
 	JPanel buttonPanel;
 	
-	public SegnaleRossoImp1(JFrame frame) {
+	public SegnaleRossoImp1(JFrame frame, Impianto impianto) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -156,7 +157,7 @@ public class SegnaleRossoImp1 extends JPanel {
 			        public void actionPerformed(ActionEvent e) {
 			        	JOptionPane.showMessageDialog(null,"<html> parametro budget disattivato </html", "Message", 1);
 						setVisible(false);
-						frame.add(new SelezioneImp1(frame));
+						frame.add(new SelezioneImp1(frame, impianto));
 			        }
 			    } 
 			);
@@ -200,8 +201,10 @@ public class SegnaleRossoImp1 extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Amministrazione(frame)); //aggiungiamo al frame il pannello della homepage
+				int j=JOptionPane.showConfirmDialog(null, "<html>Per ottimizzare le tue spese devi mofidicare il tuo attuale programma di irrigazione. Vuoi farlo ora?</html>", "Attenzione!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if(j==JOptionPane.OK_OPTION){
+				}
+				else {}
 			}
 		}
 		

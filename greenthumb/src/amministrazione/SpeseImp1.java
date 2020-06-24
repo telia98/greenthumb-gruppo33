@@ -1,5 +1,6 @@
 package amministrazione;
 
+import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -44,7 +45,7 @@ public class SpeseImp1 extends JPanel {
 	JPanel newPanel;
 	
 	
-	public SpeseImp1(JFrame frame) {
+	public SpeseImp1(JFrame frame, Impianto impianto) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -168,7 +169,7 @@ public class SpeseImp1 extends JPanel {
 			        public void actionPerformed(ActionEvent e) {
 			        	JOptionPane.showMessageDialog(null,"<html> parametro budget disattivato </html", "Message", 1);
 						setVisible(false);
-						frame.add(new SelezioneImp1(frame));
+						frame.add(new SelezioneImp1(frame, impianto));
 			        }
 			    } 
 			);
@@ -207,13 +208,13 @@ public class SpeseImp1 extends JPanel {
 	    			        	if(bolletta <= etad) { 
 	    			        	JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
 	    						setVisible(false);
-	    						frame.add(new SegnaleVerdeImp1(frame));
+	    						frame.add(new SegnaleVerdeImp1(frame, impianto));
 	    			        	}
 	    						
 	    						else if(bolletta > etad)  {
 	    			        	JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
 	    						setVisible(false);
-	    						frame.add(new SegnaleRossoImp1(frame));
+	    						frame.add(new SegnaleRossoImp1(frame, impianto));
 	    						}
 	    			        }
 	    			    } 

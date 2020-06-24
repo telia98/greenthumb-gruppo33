@@ -1,5 +1,6 @@
 package amministrazione;
 
+import utility.Impianto;
 import general.Tester;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -160,12 +161,18 @@ public class SelezioneImpianto extends JPanel {
 		class ComboListener implements ActionListener{
 			public void actionPerformed(ActionEvent event) {
 				String n= (String) selezioneImpianto.getSelectedItem();
-				
-					JOptionPane.showMessageDialog(null,"<html> Impianto selezionato</html", "Message", 1);
-					setVisible(false);
-					frame.add(new SelezioneImp1(frame));
+				ArrayList<Impianto> listaImpianti= Tester.getImpianti();
+				for(Impianto i: listaImpianti) {
+					if(i.getNome().equals(n)) {
+						JOptionPane.showMessageDialog(null,"<html> Impianto selezionato</html", "Message", 1);
+						setVisible(false);
+						
+						frame.add(new SelezioneImp1(frame,i));
+					}
 				}
+					
 			}
+		}
 		
 		ActionListener list= new ComboListener();
 		selezioneImpianto.addActionListener(list);
