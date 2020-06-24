@@ -163,7 +163,7 @@ public class SelezioneImpianto extends JPanel {
 						impianto=i;
 					}
 				}
-				frame.add(new VisualizzaProgrammiImpianto(frame,impianto,op));
+				frame.add(new VisualizzaProgrammiImpianto(frame,impianto,null));
 			}
 		}
 		ActionListener listener=new ComboListener();
