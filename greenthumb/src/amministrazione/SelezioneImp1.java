@@ -136,9 +136,9 @@ public class SelezioneImp1 extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>spese impianto 1</center></html>");
+		JLabel sectionName=new JLabel("<html><center>spese impianto</center></html>");
 		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(0,138,177));
+		sectionName.setForeground(new Color(230,202,60));
 		
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
@@ -156,6 +156,7 @@ public class SelezioneImp1 extends JPanel {
 		contenutoPanel.add(infoAppa,BorderLayout.NORTH);
 		
 		JButton button1= new JButton("OFF");
+		button1.setForeground(new Color(230,202,60));
 		contenutoPanel.add(button1);
 		
 		button1.addActionListener(
@@ -175,6 +176,7 @@ public class SelezioneImp1 extends JPanel {
 		contenuto2Panel.add(infoAppa2,BorderLayout.NORTH);
 		
 		JButton button= new JButton("?");
+		button.setForeground(new Color(230,202,60));
 		contenuto2Panel.add(button);
 		
 		button.addActionListener(

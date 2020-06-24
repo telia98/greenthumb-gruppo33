@@ -127,7 +127,7 @@ public class Amministrazione extends JPanel {
 		//inizio elementi nameSectionBarPanel
 		JLabel sectionName=new JLabel("<html><center>amministrazione</center></html>");
 		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(0,138,177));
+		sectionName.setForeground(new Color(230,202,60));
 		
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
@@ -281,8 +281,8 @@ public class Amministrazione extends JPanel {
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(imgPanel);
-		add(contenutoPanel);
 		add(emptyPanel);
+		add(contenutoPanel);
 		add(downBarPanel);
 	}
 }
