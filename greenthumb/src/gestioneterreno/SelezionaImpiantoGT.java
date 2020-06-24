@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -21,8 +22,10 @@ import javax.swing.JPanel;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.Tester;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
+import utility.Impianto;
 
 public class SelezionaImpiantoGT extends JPanel {
 	
@@ -161,10 +164,11 @@ public class SelezionaImpiantoGT extends JPanel {
 				//inizio elementi contenutoPanel
 				JComboBox<String> selezioneImpianto = new JComboBox<String>();
 				selezioneImpianto.addItem("");
-				selezioneImpianto.addItem("impianto 1");
-				selezioneImpianto.addItem("impianto 2");
-				selezioneImpianto.setEditable(false);
-				
+				ArrayList<Impianto> lista=Tester.getImpianti();
+				for(Impianto i: lista) {
+					selezioneImpianto.addItem(i.getNome());
+				}
+				selezioneImpianto.setEditable(false);	
 				contenutoPanel.add(selezioneImpianto);
 				
 				class ComboBoxListener implements ActionListener {
@@ -172,17 +176,13 @@ public class SelezionaImpiantoGT extends JPanel {
 					public void actionPerformed(ActionEvent event) {
 						
 						String n=(String) selezioneImpianto.getSelectedItem();
-						
-						if(n.equals("impianto 1")) {
-							JOptionPane.showMessageDialog(null, "<html>Hai selezionato:<br>impianto 1</html>","Message",1);
-							setVisible(false);
-							frame.add(new ModalitaIrrigazione(frame, "impianto 1")); 
-						} else 
-							JOptionPane.showMessageDialog(null, "<html>Hai selezionato:<br>impianto 2</html>","Message",1);
-							setVisible(false);
-							frame.add(new ModalitaIrrigazione(frame, "impianto 2")); 
-							
-						
+						for(Impianto i: lista) {
+							if (i.getNome().equals(n)) {
+								JOptionPane.showMessageDialog(null, "<html>Hai selezionato:<br>"+n +"</html>","Message",1);
+								setVisible(false);
+								frame.add(new ModalitaIrrigazione(frame, i)); 	
+							}
+						}
 					}
 				}
 				
