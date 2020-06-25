@@ -78,15 +78,6 @@ public class ImpostaTimer extends JPanel {
 					logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 					logo.setVisible(true);
 					logo.invalidate();
-					
-					//recupero immagine del bottone di uscita
-					Image exitImg=ImageIO.read(new File("img/exit.png"));
-					exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-					ImageIcon exitIcon=new ImageIcon(exitImg);
-					exit.setIcon(exitIcon); 
-					exit.setBorder(null); 
-					exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-					exit.setVisible(true);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -121,7 +112,7 @@ public class ImpostaTimer extends JPanel {
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(logo);
 				upBarPanel.add(new JLabel(""));
-				upBarPanel.add(exit);
+				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(appName);
@@ -140,7 +131,7 @@ public class ImpostaTimer extends JPanel {
 				
 				
 				//inizio elementi testoPanel
-				JLabel testo = new JLabel("<html><center>Imposta un timer per la data odierna:<br><br><br></center></html>");
+				JLabel testo = new JLabel("<html><center>Imposta un timer per la data odierna<br><br><br></center></html>");
 				testo.setFont(font);
 				testo.setFont(fontMax);
 				
@@ -185,13 +176,13 @@ public class ImpostaTimer extends JPanel {
 						int se=Integer.parseInt(comboRa.getSelectedItem().toString());
 						int semin=Integer.parseInt(comboMin.getSelectedItem().toString());
 						if(se!=0||semin!=0) {
-						int j=JOptionPane.showConfirmDialog(null, "Sei sicuro di voler impostare questo timer?","Attenzione!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+						int j=JOptionPane.showConfirmDialog(null, "<html>Sei sicuro<br>di voler impostare questo timer?</html>","Attenzione!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 						if(j==JOptionPane.YES_OPTION) {
-							JOptionPane.showMessageDialog(null, "<html>Attenzione!<br>Il timer è stato impostato correttamente.<br>Partirà da adesso e durerà:" + se + "h e " + semin + " minuti." + " </html>","Message",1);
+							JOptionPane.showMessageDialog(null, "<html>Il timer e' stato impostato.<br>Partira' da adesso<br>e durera':" + se + "h e " + semin + " minuti." + " </html>","Attenzione!",1);
 							setVisible(false);
 							frame.add(new GestioneTerreno(frame));
 						} else {
-							JOptionPane.showMessageDialog(null, "<html>Attenzione!<br>Premendo ok uscirai dalla schermata corrente.</html>","Message",1);
+							JOptionPane.showMessageDialog(null, "<html>Annullando l'operazione<br>non sara' impostato<br>alcun timer.</html>","Attenzione!",1);
 							setVisible(false);
 							frame.add(new ModalitaIrrigazione(frame,null));
 							}

@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.MenuPrincipale;
 import gestioneterreno.GestioneTerreno;
 import statopiante.StatoPiante;
 
@@ -73,15 +74,7 @@ public class GestioneImpianto extends JPanel {
 			logo.setFocusPainted(false);
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false);
-			exit.setVisible(true);
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -101,7 +94,7 @@ public class GestioneImpianto extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false);
-				frame.add(new Homepage(frame));
+				frame.add(new MenuPrincipale(frame));
 			}
 		}
 		ActionListener logoListener=new LogoListener();
@@ -112,7 +105,7 @@ public class GestioneImpianto extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -276,7 +269,6 @@ public class GestioneImpianto extends JPanel {
 		gestioneTerreno.setVisible(true);
 		statoPiante.setVisible(true);
 		gestioneImpianto.setVisible(true);
-		
 		downBarPanel.setLayout(new GridLayout(1,4));
 		downBarPanel.add(amministrazione);
 		downBarPanel.add(gestioneTerreno);

@@ -4,30 +4,24 @@ import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 
 import gestioneterreno.GestioneTerreno;
 import general.Homepage;
-import general.Login;
+import general.MenuPrincipale;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
 
@@ -83,37 +77,16 @@ public class SegnaleVerdeImp1 extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				frame.add(new MenuPrincipale(frame)); //aggiungiamo al frame il pannello della homepage
 			}
 		}
 		
@@ -126,7 +99,7 @@ public class SegnaleVerdeImp1 extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);

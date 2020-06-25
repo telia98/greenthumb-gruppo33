@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -20,9 +21,11 @@ import javax.swing.JPanel;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.Tester;
 import gestioneimpianto.GestioneImpianto;
 import gestioneterreno.GestioneTerreno;
 import statopiante.StatoPiante;
+import utility.Impianto;
 
 public class SelezioneImpianto extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -75,30 +78,9 @@ public class SelezioneImpianto extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
@@ -118,57 +100,54 @@ public class SelezioneImpianto extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		//fine elementi upBarPanel
+				
+		//inizio elementi infoPanel
+		JLabel message2=new JLabel("<html><center>Seleziona l'impianto di cui<br>vuoi controllarne lo stato delle piante</center></html>");
+		message2.setForeground(new Color(96,202,92));
+		contenutoPanel.add(message2);
+		//fine elementi infoPanel
+				
+		//inizio elementi comboboxPanel
+		JComboBox<String> listaImpianti=new JComboBox<String>();
+		ArrayList<Impianto> lista=Tester.getImpianti();
+		listaImpianti.addItem("");
+		for(Impianto i: lista) {
+			listaImpianti.addItem(i.getNome());
+		}
+		listaImpianti.setEditable(false);
+		sezioneImpianto.add(listaImpianti);
+		
+		class ComboListener implements ActionListener {
 			
-				//iniziocontenutoPanel
-				JLabel message=new JLabel("<html><center>Seleziona l'impianto che desideri.<br></center></html>");
-				contenutoPanel.add(message);
-				message.setForeground(new Color(96,202,92));
-				//fine contenutoPanel
-				
-				//inizio elementi infoPanel
-				JLabel message2=new JLabel("<html><center>Seleziona l'impianto di cui<br>vuoi controllarne lo stato delle piante</center></html>");
-				message2.setForeground(new Color(96,202,92));
-				contenutoPanel.add(message2);
-				//fine elementi infoPanel
-				
-				//inizio elementi comboboxPanel
-				JComboBox<String> listaImpianti=new JComboBox<String>();
-				listaImpianti.addItem(" ");
-				listaImpianti.addItem("impianto 1");
-				listaImpianti.addItem("impianto 2");
-				listaImpianti.setEditable(false);
-				sezioneImpianto.add(listaImpianti);
-				
-				
-				class ComboListener implements ActionListener {
+			public void actionPerformed(ActionEvent event) {
 					
-					public void actionPerformed(ActionEvent event) {
-					
-						String op=(String) listaImpianti.getSelectedItem();
-						
-						if (op.equals("impianto 1")) {
-							JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 1</html>","Message",1);
-							setVisible(false);
-							frame.add(new StatoPiante1(frame));
-						}
-						
-						if (op.equals("impianto 2")) {
-							JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 2</html>","Message",1);
-							setVisible(false);
-							frame.add(new StatoPiante2(frame));
-						}
+				String op=(String) listaImpianti.getSelectedItem();
+				if (op.equals("")) {
+					JOptionPane.showMessageDialog(null,"<html>Seleziona un impianto<br>dalla lista</html>","Message",1);
+				} else {	
+				if (op.equals("impianto campagna")) {
+					JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto campagna</html>","Message",1);
+					setVisible(false);
+					frame.add(new StatoPiante2(frame));
+				} else {
+					JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br> " + op+ "</html>","Message",1);
+					setVisible(false);
+					frame.add(new StatoPiante1(frame));
 					}
+				
 				}
-				ActionListener listener=new ComboListener();
-				listaImpianti.addActionListener(listener);		
-				//fine elementi comboboxPanel
+			}
+		}
+		ActionListener listener=new ComboListener();
+		listaImpianti.addActionListener(listener);		
+		//fine elementi comboboxPanel
 		
 		//inizio elementi nameSectionBarPanel
 		JLabel sectionName1=new JLabel("<html><center>Scegli Impianto</center></html>");

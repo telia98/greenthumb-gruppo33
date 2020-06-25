@@ -24,11 +24,9 @@ import javax.swing.JPanel;
 
 import gestioneterreno.GestioneTerreno;
 import general.Homepage;
-import general.Login;
-import general.Tester;
+import general.MenuPrincipale;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
-import utility.Impianto;
 
 public class SelezioneImpianto extends JPanel {
 
@@ -81,37 +79,16 @@ public class SelezioneImpianto extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				frame.add(new MenuPrincipale(frame)); //aggiungiamo al frame il pannello della homepage
 			}
 		}
 		
@@ -124,7 +101,7 @@ public class SelezioneImpianto extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -164,7 +141,7 @@ public class SelezioneImpianto extends JPanel {
 				ArrayList<Impianto> listaImpianti= Tester.getImpianti();
 				for(Impianto i: listaImpianti) {
 					if(i.getNome().equals(n)) {
-						JOptionPane.showMessageDialog(null,"<html> Impianto selezionato</html", "Message", 1);
+						JOptionPane.showMessageDialog(null,"<html> Impianto selezionato:<br>" + n + "</html", "Message", 1);
 						setVisible(false);
 						
 						frame.add(new SelezioneImp1(frame,i));
@@ -228,6 +205,16 @@ public class SelezioneImpianto extends JPanel {
 			e.printStackTrace();
 		}
 		
+		class AmministrazioneListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new Amministrazione(frame));
+			}
+		}
+		ActionListener amministrazioneListener=new AmministrazioneListener();
+		amministrazione.addActionListener(amministrazioneListener);
 		
 		class TerrenoListener implements ActionListener {
 

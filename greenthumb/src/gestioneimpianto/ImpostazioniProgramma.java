@@ -23,6 +23,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import general.Homepage;
+import general.MenuPrincipale;
 import general.Tester;
 import utility.Impianto;
 import utility.ProgrammaIrrigazione;
@@ -88,15 +89,6 @@ public class ImpostazioniProgramma extends JPanel {
 			logo.setFocusPainted(false);
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false);
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -116,7 +108,7 @@ public class ImpostazioniProgramma extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false);
-				frame.add(new Homepage(frame));
+				frame.add(new MenuPrincipale(frame));
 			}
 		}
 		ActionListener logoListener=new LogoListener();
@@ -127,7 +119,7 @@ public class ImpostazioniProgramma extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -172,7 +164,7 @@ public class ImpostazioniProgramma extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler annullare<br>la tua richiesta di operazione?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+				int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler annullare<br>la tua richiesta di operazione?<br><br>Tutte le modifiche effettuate<br>saranno perse.</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 				if (j==JOptionPane.OK_OPTION) {
 					setVisible(false);
 					if (programma!=null)
@@ -288,7 +280,7 @@ public class ImpostazioniProgramma extends JPanel {
 
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler salvare<br>le modifiche effettuate al programma?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+					int j=JOptionPane.showConfirmDialog(null,"<html>Confermi il salvataggio<br>delle modifiche<br> effettuate al programma?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 					if (j==JOptionPane.OK_OPTION) {
 						String np=inputNome.getText();
 						int pg=Integer.parseInt(inputGetto.getText());
@@ -315,7 +307,7 @@ public class ImpostazioniProgramma extends JPanel {
 						Tester.addProgramma(modificato);
 						System.out.println(Tester.getProgrammi());
 						
-						JOptionPane.showMessageDialog(null,"<html>La modifica del programma d'irrigazione<br>è avvenuta con successo</html>","Message",1);
+						JOptionPane.showMessageDialog(null,"<html>La modifica<br>del programma d'irrigazione<br>è avvenuta con successo</html>","Message",1);
 						setVisible(false);
 						frame.add(new VisualizzaProgrammiImpianto(frame,modificato.getImpianto(),modificato));
 					}
@@ -335,7 +327,7 @@ public class ImpostazioniProgramma extends JPanel {
 
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler salvare<br>il programma d'irrigazione inserito?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+					int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler salvare<br>il programma d'irrigazione<br>appena inserito?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 					if (j==JOptionPane.OK_OPTION) {
 						String np=inputNome.getText();
 						int pg=Integer.parseInt(inputGetto.getText());
@@ -360,9 +352,12 @@ public class ImpostazioniProgramma extends JPanel {
 						Tester.addProgramma(programma);
 						System.out.println(Tester.getProgrammi());
 						
-						JOptionPane.showMessageDialog(null,"<html>Il nuovo programma d'irrigazione<br>è stato inserito con successo</html>","Message",1);
+						JOptionPane.showMessageDialog(null,"<html>Il programma d'irrigazione<br>è stato inserito con successo</html>","Message",1);
 						setVisible(false);
 						frame.add(new VisualizzaProgrammiImpianto(frame,programma.getImpianto(),programma));
+					} else {
+						setVisible(false);
+						frame.add(new VisualizzaProgrammiImpianto(frame,impianto,null));
 					}
 				}
 			}

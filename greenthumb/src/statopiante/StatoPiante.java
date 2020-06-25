@@ -75,30 +75,9 @@ public class StatoPiante extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
@@ -118,7 +97,7 @@ public class StatoPiante extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -127,7 +106,7 @@ public class StatoPiante extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-				JLabel sectionName=new JLabel("<html><center>Gestione Piante</center></html>");
+				JLabel sectionName=new JLabel("<html><center>Stato Piante</center></html>");
 				sectionName.setFont(fontBig);
 				sectionName.setForeground(new Color(96,202,92));
 				

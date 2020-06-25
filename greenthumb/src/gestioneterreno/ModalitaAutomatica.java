@@ -35,7 +35,7 @@ public class ModalitaAutomatica extends JPanel{
 	private static final long serialVersionUID = 1L;
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
-	JPanel testoPanel; //panel per la descrizione di cosa si andrà a fare
+	JPanel testoPanel; //panel per la descrizione di cosa si andrï¿½ a fare
 	JPanel dropdownPanel; //panel per la selezione del programma
 	JPanel textAreaPanel; 
 	JPanel textAreaPanel2; 
@@ -91,14 +91,6 @@ public class ModalitaAutomatica extends JPanel{
 			logo.setVisible(true);
 			logo.invalidate();
 			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -133,7 +125,7 @@ public class ModalitaAutomatica extends JPanel{
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -142,7 +134,7 @@ public class ModalitaAutomatica extends JPanel{
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>Modalità automatica</center></html>");
+		JLabel sectionName=new JLabel("<html><center>Modalitï¿½ automatica</center></html>");
 		sectionName.setFont(fontBig);
 		sectionName.setForeground(new Color(0,138,177));
 		
@@ -240,7 +232,7 @@ public class ModalitaAutomatica extends JPanel{
 				
 				if(pr!=null) {
 				
-				JOptionPane.showMessageDialog(null, "<html>ATTENZIONE! Il programma è stato impostato correttamente.<br></html>","Message",1);
+				JOptionPane.showMessageDialog(null, "<html>Il programma<br>e' stato impostato correttamente.<br></html>","Attenzione!",1);
 				setVisible(false);
 				frame.add(new GestioneTerreno(frame)); 
 				

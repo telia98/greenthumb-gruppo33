@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.MenuPrincipale;
 import general.Tester;
 import gestioneterreno.GestioneTerreno;
 import statopiante.StatoPiante;
@@ -91,37 +92,16 @@ public class AggiungiImpianto extends JPanel {
 			logo.setFocusPainted(false);
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false);
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new Homepage(frame));
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false);
-				frame.add(new Homepage(frame));
+				frame.add(new MenuPrincipale(frame));
 			}
 		}
 		ActionListener logoListener=new LogoListener();
@@ -132,7 +112,7 @@ public class AggiungiImpianto extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -178,7 +158,7 @@ public class AggiungiImpianto extends JPanel {
 		class questioCodiceListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(null,"<html>Inserisci il codice<br>riportato sulla confezione dell'impianto</html>","Codice impianto",1);
+				JOptionPane.showMessageDialog(null,"<html>Inserisci il codice riportato <br>sulla confezione dell'impianto</html>","Codice impianto",1);
 			}
 		}
 		ActionListener codiceListener=new questioCodiceListener();
@@ -264,7 +244,7 @@ public class AggiungiImpianto extends JPanel {
 			Impianto impianto=null;
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler aggiungere<br>l'impianto al sistema?</html>","Attenzione!",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+				int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler aggiungere<br>l'impianto al sistema?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 				if (j==JOptionPane.OK_OPTION) {
 					//conferma di voler aggiungere l'impianto
 					impianto=new Impianto(inputNome.getText(),inputCodice.getText(),inputVia.getText(),inputCivico.getText(),inputCitta.getText());

@@ -4,31 +4,26 @@ import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 
 import gestioneterreno.GestioneTerreno;
 import general.Homepage;
-import general.Login;
+import general.MenuPrincipale;
 import gestioneimpianto.GestioneImpianto;
+import gestioneimpianto.VisualizzaProgrammiImpianto;
 import statopiante.StatoPiante;
 
 public class SegnaleRossoImp1 extends JPanel {
@@ -83,37 +78,16 @@ public class SegnaleRossoImp1 extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				frame.add(new MenuPrincipale(frame)); //aggiungiamo al frame il pannello della homepage
 			}
 		}
 		
@@ -126,7 +100,7 @@ public class SegnaleRossoImp1 extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -166,6 +140,7 @@ public class SegnaleRossoImp1 extends JPanel {
 		//inizio elementi contenuto2Panel
 		JLabel infoApp = new JLabel("<html><center>costo sostenuto superiore al budget</center></html>");
 		infoApp.setFont(font);
+		infoApp.setForeground(Color.RED);
 		contenuto2Panel.add(infoApp,BorderLayout.NORTH);
 		//fine 
 		
@@ -197,20 +172,22 @@ public class SegnaleRossoImp1 extends JPanel {
 		
 		buttonPanel.add(gotoAmministrazione);
 		
-		class AmministrazioneListener implements ActionListener {
+		class AdminListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				int j=JOptionPane.showConfirmDialog(null, "<html>Per ottimizzare le tue spese devi mofidicare il tuo attuale programma di irrigazione. Vuoi farlo ora?</html>", "Attenzione!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				int j=JOptionPane.showConfirmDialog(null, "<html>Per ottimizzare le tue spese<br>devi modificare<br>il tuo attuale piano d'irrigazione.<br><br>Vuoi farlo ora?</html>", "Attenzione!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(j==JOptionPane.OK_OPTION){
+					setVisible(false);
+					frame.add(new VisualizzaProgrammiImpianto(frame,impianto,null));
 				}
 				else {}
 			}
 		}
 		
 		//collego il listener al bottone login
-		ActionListener amministrazioneListener=new AmministrazioneListener();
-		gotoAmministrazione.addActionListener(amministrazioneListener);
+		ActionListener adminListener=new AdminListener();
+		gotoAmministrazione.addActionListener(adminListener);
 		//fine buttonPanel
 
 		
@@ -263,7 +240,17 @@ public class SegnaleRossoImp1 extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	
+		class AmministrazioneListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new Amministrazione(frame));
+			}
+		}
+		ActionListener amministrazioneListener=new AmministrazioneListener();
+		amministrazione.addActionListener(amministrazioneListener);
 		
 		class TerrenoListener implements ActionListener {
 
@@ -321,16 +308,10 @@ public class SegnaleRossoImp1 extends JPanel {
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(contenutoPanel);
-		add(contenuto2Panel);
 		add(imgPanel);
+		add(contenuto2Panel);
 		add(buttonPanel);
 		add(downBarPanel);
-	}
-
-
-	
-
-
-	
+	}	
 }
 

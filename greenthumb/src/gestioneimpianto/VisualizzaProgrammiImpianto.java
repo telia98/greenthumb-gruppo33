@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.MenuPrincipale;
 import general.Tester;
 import gestioneterreno.GestioneTerreno;
 import statopiante.StatoPiante;
@@ -39,7 +40,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 	JPanel modificaPanel; //pannello per la modifica di un programma d'irrigazione
 	
 	public VisualizzaProgrammiImpianto(JFrame frame,Impianto impianto,ProgrammaIrrigazione programma) {
-		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
+		Font fontBig = new Font("Herculanum", Font.BOLD, 25);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
 		Font font = new Font("Comic sans", Font.PLAIN, 13);
@@ -83,15 +84,6 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 			logo.setFocusPainted(false);
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false);
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -111,7 +103,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false);
-				frame.add(new Homepage(frame));
+				frame.add(new MenuPrincipale(frame));
 			}
 		}
 		ActionListener logoListener=new LogoListener();
@@ -122,7 +114,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -131,7 +123,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>gestione impianto</center></html>");
+		JLabel sectionName=new JLabel("<html><center>Visualizza programma</center></html>");
 		sectionName.setFont(fontBig);
 		sectionName.setForeground(new Color(89,105,109));
 		sectionName.setVisible(true);

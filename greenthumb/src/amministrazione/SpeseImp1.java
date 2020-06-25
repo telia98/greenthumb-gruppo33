@@ -4,31 +4,25 @@ import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 
 import gestioneterreno.GestioneTerreno;
 import general.Homepage;
-import general.Login;
+import general.MenuPrincipale;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
 
@@ -89,37 +83,16 @@ public class SpeseImp1 extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				frame.add(new MenuPrincipale(frame)); //aggiungiamo al frame il pannello della homepage
 			}
 		}
 		
@@ -132,7 +105,7 @@ public class SpeseImp1 extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -177,11 +150,10 @@ public class SpeseImp1 extends JPanel {
 		
 		
 		//inizio newPanel
-		JLabel infoAppk = new JLabel("<html><center>deve essere privo di punteggiatura</center></html>");
+		JLabel infoAppk = new JLabel("<html><center>Il parametro numerico che viene inserito<br>deve essere privo di frazione decimale</center></html>");
 		infoAppk.setFont(font);
 		newPanel.add(infoAppk,BorderLayout.NORTH);
 		//fine newPanel
-		
 		
 		//inizio elementi contenuto2Panel
 		JTextField etat = new JTextField( 10);
@@ -191,48 +163,32 @@ public class SpeseImp1 extends JPanel {
 		button2.setForeground(new Color(230,202,60));
 		contenuto2Panel.add(button2);
 		
-		
-		
-	        	button2.addActionListener(
-	    				new ActionListener() {
-	    			        public void actionPerformed(ActionEvent e) {
-	    			        	String etas = ""; 
-	    			 	       	int etad = 0;
-	    			 	        	try {
-	    			 	        	    etas = etat.getText();
-	    			 	        	    etad = Integer.parseInt(etas);
-	    			 	        	}catch (Exception ex) {}
+		button2.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		String etas = ""; 
+	    		int etad = 0;
+	    		try {
+	    			etas = etat.getText();
+	    			etad = Integer.parseInt(etas);
+	    		} catch (Exception ex) {
+	    			ex.printStackTrace();
+	    		}
 	    			 	        	
-	    			        	int bolletta= 1000;
+	    		int bolletta= 1000;
 	    			        	
-	    			        	if(bolletta <= etad) { 
-	    			        	JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
-	    						setVisible(false);
-	    						frame.add(new SegnaleVerdeImp1(frame, impianto));
-	    			        	}
-	    						
-	    						else if(bolletta > etad)  {
-	    			        	JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
-	    						setVisible(false);
-	    						frame.add(new SegnaleRossoImp1(frame, impianto));
-	    						}
-	    			        }
-	    			    } 
-	    			);
-			      
-			        	
-			        	
-			        	
-			       
-			        
-		
-			        	
-			        
-		
+	    		if(bolletta <= etad) { 
+	    				JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
+	    				setVisible(false);
+	    				frame.add(new SegnaleVerdeImp1(frame, impianto));
+	    		} else if(bolletta > etad)  {
+	    			    JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
+	    				setVisible(false);
+	    				frame.add(new SegnaleRossoImp1(frame, impianto));
+	    		}
+	    	 }
+	    });    
 		//fine elementi contenuto2Panel
-		
-
-		
+	
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
 		amministrazione.setPreferredSize(new Dimension(150,200));
@@ -283,6 +239,16 @@ public class SpeseImp1 extends JPanel {
 			e.printStackTrace();
 		}
 		
+		class AmministrazioneListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new Amministrazione(frame));
+			}
+		}
+		ActionListener amministrazioneListener=new AmministrazioneListener();
+		amministrazione.addActionListener(amministrazioneListener);
 		
 		class TerrenoListener implements ActionListener {
 
@@ -348,10 +314,5 @@ public class SpeseImp1 extends JPanel {
 		add(downBarPanel);
 	}
 
-
-	
-
-
-	
 }
 

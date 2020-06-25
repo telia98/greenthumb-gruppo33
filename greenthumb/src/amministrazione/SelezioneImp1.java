@@ -4,30 +4,24 @@ import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 
 import gestioneterreno.GestioneTerreno;
 import general.Homepage;
-import general.Login;
+import general.MenuPrincipale;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
 
@@ -86,37 +80,16 @@ public class SelezioneImp1 extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				frame.add(new MenuPrincipale(frame)); //aggiungiamo al frame il pannello della homepage
 			}
 		}
 		
@@ -129,7 +102,7 @@ public class SelezioneImp1 extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -147,7 +120,7 @@ public class SelezioneImp1 extends JPanel {
 		//fine elementi nameSectionBarPanel
 		
 		//inizio elementi imgPanel
-		JLabel infoApp = new JLabel("<html><center>abilita l'operazione<br>per stabilire un parametro<br>entro i quali i costi di irrigazione dovrebbero rientrare<br><br><br><br></center></html>");
+		JLabel infoApp = new JLabel("<html><center>abilita l'opzione<br>per stabilire un parametro<br>entro i quali i costi di irrigazione<br>dovrebbero rientrare<br><br><br><br></center></html>");
 		infoApp.setFont(font);
 		imgPanel.add(infoApp,BorderLayout.NORTH);
 		//fine elementi imgPanel
@@ -173,7 +146,7 @@ public class SelezioneImp1 extends JPanel {
 		//fine elementi contenutoPanel
 		
 		//inizio elementi contenuto2Panel
-		JLabel infoAppa2 = new JLabel("<html>cosa Ë il budget</html>");
+		JLabel infoAppa2 = new JLabel("<html>cosa e' il budget</html>");
 		infoAppa2.setFont(font);
 		contenuto2Panel.add(infoAppa2,BorderLayout.NORTH);
 		
@@ -184,7 +157,7 @@ public class SelezioneImp1 extends JPanel {
 		button.addActionListener(
 			    new ActionListener() {
 			        public void actionPerformed(ActionEvent e) {
-			        	JOptionPane.showMessageDialog(null,"<html> PARAMETRO NUMERICO<br>entro il quale i costi di irrigazione devono rientrare</html", "Message", 1);
+			        	JOptionPane.showMessageDialog(null,"<html> PARAMETRO NUMERICO<br>entro il quale<br>far rientrare i costi<br>dell'attivit√† d'irrigazione</html", "Message", 1);
 						setVisible(true);
 						frame.add(new SelezioneImp1(frame, impianto));
 			        }
@@ -243,6 +216,16 @@ public class SelezioneImp1 extends JPanel {
 			e.printStackTrace();
 		}
 		
+		class AmministrazioneListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new Amministrazione(frame));
+			}
+		}
+		ActionListener amministrazioneListener=new AmministrazioneListener();
+		amministrazione.addActionListener(amministrazioneListener);
 		
 		class TerrenoListener implements ActionListener {
 

@@ -22,7 +22,7 @@ public class Tester {
 		
 		//creazione programmi
 		ProgrammaIrrigazione programmaA=new ProgrammaIrrigazione(impianto1,"programma A",10,false,LocalTime.of(6,00),LocalTime.of(8,00),"a getto continuo");
-		ProgrammaIrrigazione programmaB=new ProgrammaIrrigazione(impianto1,"programma B",10,false,LocalTime.of(6,00),LocalTime.of(8,00),"a getto continuo");
+		ProgrammaIrrigazione programmaB=new ProgrammaIrrigazione(impianto1,"programma B",10,true,LocalTime.of(5,00),LocalTime.of(7,00),"a getto continuo");
 		ProgrammaIrrigazione programmaC=new ProgrammaIrrigazione(impianto2,"programma C",6,true,LocalTime.of(9,00),LocalTime.of(11,00),"a intervalli regolari");
 		
 		//creazione lista programmi
@@ -41,6 +41,7 @@ public class Tester {
 		System.out.println(listaImpianti);
 		JFrame frame=new JFrame(); //per far partire la simulazione del dispositivo scelto
 		frame.add(new Homepage(frame));
+		frame.setLocation(550,100);
 		frame.setSize(340,580);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

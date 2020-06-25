@@ -19,8 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
+import amministrazione.Amministrazione;
 import general.Homepage;
+import general.MenuPrincipale;
 import gestioneimpianto.GestioneImpianto;
 import gestioneterreno.GestioneTerreno;
 import statopiante.ModificaAgrofarmaci;
@@ -77,37 +78,16 @@ public class Agrofarmaci extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				frame.add(new MenuPrincipale(frame)); //aggiungiamo al frame il pannello della homepage
 			}
 		}
 		
@@ -120,7 +100,7 @@ public class Agrofarmaci extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -179,19 +159,17 @@ public class Agrofarmaci extends JPanel {
 		//inizio elementi modificheRiportate
 		modificheRiportate2Panel.setLayout(new GridLayout(3,3));
 		
-			Collections.sort(ModificaAgrofarmaci.farmaco); // Sort farmaco
-			
-		    for (String i : ModificaAgrofarmaci.farmaco) {
-		    	
-		    	JCheckBox c= new JCheckBox(i);
-	    	
-		    	modificheRiportate2Panel.add(c);
-		    	modificheRiportate2Panel.add(new JLabel(""));
-		    }
-	
+		Collections.sort(ModificaAgrofarmaci.farmaco); // Sort farmaco
+		for (String i : ModificaAgrofarmaci.farmaco) {
+			JCheckBox c= new JCheckBox(i);
+		    c.setEnabled(false);
+		    modificheRiportate2Panel.add(new JLabel(""));
+		    modificheRiportate2Panel.add(c);
+		    modificheRiportate2Panel.add(new JLabel(""));
+		 }
 		 //fine elementi modificheRiportate
 
-	  //inizio bottone modificaAgro bottone
+		//inizio bottone modificaAgro bottone
 	  		JButton modificaAgro=new JButton("modifica Agrofarmaci");
 	  		modificaAgro.setForeground(new Color(96,202,92));
 	  		modificaAgro.setFont(fontMedium);
@@ -202,7 +180,7 @@ public class Agrofarmaci extends JPanel {
 
 	  			public void actionPerformed(ActionEvent e) {
 	  				
-	  					int i =JOptionPane.showConfirmDialog(null, "vuoi procedere a modificare gli agrofarmaci?", "attenzione", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+	  					int i =JOptionPane.showConfirmDialog(null, "<html>vuoi procedere<br>alla modifica<br>della miscela<br>di agrofarmaci?</html>", "attenzione", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 	  					if(i == JOptionPane.YES_OPTION){
 	  						setVisible(false); 
 	  						frame.add(new ModificaAgrofarmaci(frame));
@@ -271,6 +249,16 @@ public class Agrofarmaci extends JPanel {
 			e.printStackTrace();
 		}
 		
+		class AmministrazioneListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new Amministrazione(frame)); 
+			}
+		}
+		ActionListener amministrazioneListener=new AmministrazioneListener();
+		amministrazione.addActionListener(amministrazioneListener);
 		
 		class TerrenoListener implements ActionListener {
 

@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import amministrazione.Amministrazione;
 import general.Homepage;
 import gestioneimpianto.GestioneImpianto;
 import gestioneterreno.GestioneTerreno;
@@ -83,30 +84,9 @@ public class ModificaAgrofarmaci extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
@@ -126,7 +106,7 @@ public class ModificaAgrofarmaci extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -218,28 +198,33 @@ public class ModificaAgrofarmaci extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler modificare<br>la miscela di agrofarmaci?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+				if (j==JOptionPane.OK_OPTION) {
 					if(enovit.isSelected()){  
-			            farmaco.add("enovit");
-			        }  
-			        if(contraxs.isSelected()){  
-			        	farmaco.add("contraxs stange");
-			        }  
-			        if(quintamon.isSelected()){  
-			        	farmaco.add("quintamon");
-			        }  
-			        if(ziram.isSelected()){  
-			        	farmaco.add("ziram 80");
-			        }  
-			        if(diledit.isSelected()){  
-			        	farmaco.add("ziram 80");
-			        }  
-			        if(bromcid.isSelected()){  
-			        	farmaco.add("ziram 80");
-			        }  
-					JOptionPane.showMessageDialog(null,"<html>la miscela è stata aggiunta con successo</html>","Message",1);
-					setVisible(false); //possibilita di mettere no???
+						farmaco.add("enovit");
+					}  
+					if(contraxs.isSelected()){  
+						farmaco.add("contraxs stange");
+					}  
+					if(quintamon.isSelected()){  
+						farmaco.add("quintamon");
+					}  
+					if(ziram.isSelected()){  
+						farmaco.add("ziram 80");
+					} 	 
+					if(diledit.isSelected()){  
+						farmaco.add("ziram 80");
+					}  
+					if(bromcid.isSelected()){  
+						farmaco.add("ziram 80");
+					}  
+					JOptionPane.showMessageDialog(null,"<html>La miscela di agrofarmaci<br>è stata modificata<br>con successo</html>","Message",1);
+					setVisible(false);
 					frame.add(new Agrofarmaci(frame));
+				} else {
+					
 				}
+			}
 		}
 		
 		//collego il listener al bottone ottimizza
@@ -299,6 +284,16 @@ public class ModificaAgrofarmaci extends JPanel {
 			e.printStackTrace();
 		}
 		
+		class AmministrazioneListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new Amministrazione(frame)); 
+			}
+		}
+		ActionListener amministrazioneListener=new AmministrazioneListener();
+		amministrazione.addActionListener(amministrazioneListener);
 		
 		class TerrenoListener implements ActionListener {
 

@@ -32,7 +32,7 @@ public class SelezionaImpiantoGT extends JPanel {
 	private static final long serialVersionUID = 1L;
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
-	JPanel testoPanel; //panel per la descrizione di cosa si andrà a fare
+	JPanel testoPanel; //panel per la descrizione di cosa si andrï¿½ a fare
 	JPanel testoPanel2;
 	JPanel contenutoPanel; //contenuto della schermata
 	JPanel emptyPanel; // panel vuoto
@@ -88,15 +88,6 @@ public class SelezionaImpiantoGT extends JPanel {
 					logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 					logo.setVisible(true);
 					logo.invalidate();
-					
-					//recupero immagine del bottone di uscita
-					Image exitImg=ImageIO.read(new File("img/exit.png"));
-					exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-					ImageIcon exitIcon=new ImageIcon(exitImg);
-					exit.setIcon(exitIcon); 
-					exit.setBorder(null); 
-					exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-					exit.setVisible(true);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -131,7 +122,7 @@ public class SelezionaImpiantoGT extends JPanel {
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(logo);
 				upBarPanel.add(new JLabel(""));
-				upBarPanel.add(exit);
+				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(appName);
@@ -155,7 +146,7 @@ public class SelezionaImpiantoGT extends JPanel {
 				//fine elementi testoPanel
 				
 				//inizio testoPanel 2
-				JLabel info2 = new JLabel("<html><center>La tua selezione sarà mantenuta<br>per tutte le operazioni successive.<br><br><br></center></html>");
+				JLabel info2 = new JLabel("<html><center>La tua selezione sara' mantenuta<br>per tutte le operazioni successive.<br><br><br></center></html>");
 				info2.setFont(font);
 				testoPanel2.add(info2,BorderLayout.NORTH);
 				//fine testoPanel 2

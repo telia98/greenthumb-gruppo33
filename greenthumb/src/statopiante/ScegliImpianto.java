@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -22,8 +23,10 @@ import javax.swing.JPanel;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.Tester;
 import gestioneimpianto.GestioneImpianto;
 import gestioneterreno.GestioneTerreno;
+import utility.Impianto;
 
 public class ScegliImpianto extends JPanel {
 
@@ -38,8 +41,6 @@ public class ScegliImpianto extends JPanel {
 	public ScegliImpianto (JFrame frame) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
-		//Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
-		//Font font = new Font("Comic sans", Font.PLAIN, 13);
 		
 		upBarPanel=new JPanel();
 		upBarPanel.setBackground(Color.WHITE);
@@ -77,30 +78,9 @@ public class ScegliImpianto extends JPanel {
 			logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//action listener per i bottoni
-		class ExitListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello del menu principale
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
-			}
-		}
-		ActionListener exitListener=new ExitListener();
-		exit.addActionListener(exitListener);
 		
 		class LogoListener implements ActionListener {
 
@@ -120,57 +100,43 @@ public class ScegliImpianto extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		//fine elementi upBarPanel
+				
+		//inizio elementi infoPanel
+		JLabel message2=new JLabel("<html><center>Seleziona l'impianto di cui<br>vuoi aggiungere gli agrofarmaci</center></html>");
+		message2.setForeground(new Color(96,202,92));
+		contenutoPanel.add(message2);
+		//fine elementi infoPanel
+				
+		//inizio elementi comboboxPanel
+		JComboBox<String> listaImpianti=new JComboBox<String>();
+		ArrayList<Impianto> lista=Tester.getImpianti();
+		listaImpianti.addItem("");
+		for(Impianto i: lista) {
+			listaImpianti.addItem(i.getNome());
+		}
+		listaImpianti.setEditable(false);
+		contenutoPanel.add(listaImpianti);
+		
+		class ComboListener implements ActionListener {
 			
-				//iniziocontenutoPanel
-				JLabel message=new JLabel("<html><center>Seleziona l'impianto che desideri.<br></center></html>");
-				contenutoPanel.add(message);
-				message.setForeground(new Color(96,202,92));
-				//fine contenutoPanel
-				
-				//inizio elementi infoPanel
-				JLabel message2=new JLabel("<html><center>Seleziona l'impianto di cui<br>vuoi aggiungere gli agrofarmaci</center></html>");
-				message2.setForeground(new Color(96,202,92));
-				contenutoPanel.add(message2);
-				//fine elementi infoPanel
-				
-				//inizio elementi comboboxPanel
-				JComboBox<String> listaImpianti=new JComboBox<String>();
-				listaImpianti.addItem(" ");
-				listaImpianti.addItem("impianto 1");
-				listaImpianti.addItem("impianto 2");
-				listaImpianti.setEditable(false);
-				sezioneImpianto.add(listaImpianti);
-				
-				
-				class ComboListener implements ActionListener {
+			public void actionPerformed(ActionEvent event) {
 					
-					public void actionPerformed(ActionEvent event) {
-					
-						String op=(String) listaImpianti.getSelectedItem();
-						
-						if (op.equals("impianto 1")) {
-							JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 1</html>","Message",1);
-							setVisible(false);
-							frame.add(new Agrofarmaci(frame));
-						}
-						
-						if (op.equals("impianto 2")) {
-							JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>impianto 2</html>","Message",1);
-							setVisible(false);
-							frame.add(new Agrofarmaci(frame));
-						}
-					}
-				}
-				ActionListener listener=new ComboListener();
-				listaImpianti.addActionListener(listener);		
-				//fine elementi comboboxPanel
+				String op=(String) listaImpianti.getSelectedItem();
+				
+				setVisible(false);
+				frame.add(new Agrofarmaci(frame));
+			}
+		}
+		ActionListener listener=new ComboListener();
+		listaImpianti.addActionListener(listener);		
+		//fine elementi comboboxPanel
 		
 		//inizio elementi nameSectionBarPanel
 		JLabel sectionName1=new JLabel("<html><center>Scegli Impianto</center></html>");
@@ -180,10 +146,6 @@ public class ScegliImpianto extends JPanel {
 		sectionName1.setVisible(true);
 		nameSectionBarPanel.add(sectionName1);
 		//fine elementi nameSectionBarPanel
-		
-		//inizio elementi imgPanel
-		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
-
 		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();

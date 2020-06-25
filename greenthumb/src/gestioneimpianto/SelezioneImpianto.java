@@ -19,8 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import amministrazione.Amministrazione;
 import general.Homepage;
+import general.MenuPrincipale;
 import general.Tester;
+import gestioneterreno.GestioneTerreno;
+import statopiante.StatoPiante;
 import utility.Impianto;
 
 public class SelezioneImpianto extends JPanel {
@@ -74,15 +78,6 @@ public class SelezioneImpianto extends JPanel {
 			logo.setFocusPainted(false);
 			logo.setVisible(true);
 			logo.invalidate();
-			
-			//recupero immagine del bottone di uscita
-			Image exitImg=ImageIO.read(new File("img/exit.png"));
-			exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-			ImageIcon exitIcon=new ImageIcon(exitImg);
-			exit.setIcon(exitIcon); 
-			exit.setBorder(null); 
-			exit.setFocusPainted(false);
-			exit.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
@@ -102,7 +97,7 @@ public class SelezioneImpianto extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false);
-				frame.add(new Homepage(frame));
+				frame.add(new MenuPrincipale(frame));
 			}
 		}
 		ActionListener logoListener=new LogoListener();
@@ -113,7 +108,7 @@ public class SelezioneImpianto extends JPanel {
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(logo);
 		upBarPanel.add(new JLabel(""));
-		upBarPanel.add(exit);
+		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(new JLabel(""));
 		upBarPanel.add(appName);
@@ -173,6 +168,112 @@ public class SelezioneImpianto extends JPanel {
 		ActionListener listener=new ComboListener();
 		listaImpianti.addActionListener(listener);		
 		//fine elementi comboboxPanel
+		
+		//inizio elementi downBarPanel
+		JButton amministrazione=new JButton();
+		amministrazione.setPreferredSize(new Dimension(150,200));
+		JButton gestioneTerreno=new JButton();
+		gestioneTerreno.setPreferredSize(new Dimension(150,200));
+		JButton statoPiante=new JButton();
+		statoPiante.setPreferredSize(new Dimension(150,200));
+		JButton gestioneImpianto=new JButton();
+		gestioneImpianto.setPreferredSize(new Dimension(150,200));
+		
+		try {
+			//recupero immagine amministrazione
+			Image soldiImg=ImageIO.read(new File("img/adminLogo.png"));
+			soldiImg=soldiImg.getScaledInstance(40,50,Image.SCALE_SMOOTH);
+			ImageIcon icona=new ImageIcon(soldiImg);
+			amministrazione.setIcon(icona); 
+			amministrazione.setBorder(null); 
+			amministrazione.setFocusPainted(false);
+			amministrazione.setVisible(true);
+			
+			//recupero immagine gestione terreno
+			Image gocciaImg=ImageIO.read(new File("img/terrenoLogo.png"));
+			gocciaImg=gocciaImg.getScaledInstance(40,50,Image.SCALE_SMOOTH);
+			ImageIcon icona2=new ImageIcon(gocciaImg);
+			gestioneTerreno.setIcon(icona2); 
+			gestioneTerreno.setBorder(null); 
+			gestioneTerreno.setFocusPainted(false);
+			gestioneTerreno.setVisible(true);
+			
+			//recupero immagine stato piante
+			Image boccettaImg=ImageIO.read(new File("img/pianteLogo.png"));
+			boccettaImg=boccettaImg.getScaledInstance(40,50,Image.SCALE_SMOOTH);
+			ImageIcon icona3=new ImageIcon(boccettaImg);
+			statoPiante.setIcon(icona3); 
+			statoPiante.setBorder(null); 
+			statoPiante.setFocusPainted(false); 
+			statoPiante.setVisible(true);
+			
+			//recupero immagine gestione impianto
+			Image attrezzoImg=ImageIO.read(new File("img/impiantoLogo.png"));
+			attrezzoImg=attrezzoImg.getScaledInstance(40,50,Image.SCALE_SMOOTH);
+			ImageIcon icona4=new ImageIcon(attrezzoImg);
+			gestioneImpianto.setIcon(icona4); 
+			gestioneImpianto.setBorder(null); 
+			gestioneImpianto.setFocusPainted(false); 
+			gestioneImpianto.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		class AmministrazioneListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new Amministrazione(frame));
+			}
+		}
+		ActionListener amministrazioneListener=new AmministrazioneListener();
+		amministrazione.addActionListener(amministrazioneListener);
+		
+		class TerrenoListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new GestioneTerreno(frame));
+			}
+		}
+		ActionListener terrenoListener=new TerrenoListener();
+		gestioneTerreno.addActionListener(terrenoListener);
+		
+		class PianteListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false); 
+				frame.add(new StatoPiante(frame));
+			}
+		}
+		ActionListener pianteListener=new PianteListener();
+		statoPiante.addActionListener(pianteListener);
+		
+		class ImpiantoListener implements ActionListener {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false);
+				frame.add(new GestioneImpianto(frame));
+			}
+		}
+		ActionListener impiantoListener=new ImpiantoListener();
+		gestioneImpianto.addActionListener(impiantoListener);
+		
+		amministrazione.setVisible(true);
+		gestioneTerreno.setVisible(true);
+		statoPiante.setVisible(true);
+		gestioneImpianto.setVisible(true);
+		
+		downBarPanel.setLayout(new GridLayout(1,4));
+		downBarPanel.add(amministrazione);
+		downBarPanel.add(gestioneTerreno);
+		downBarPanel.add(statoPiante);
+		downBarPanel.add(gestioneImpianto);
+		//fine elementi downBarPanel
 		
 		upBarPanel.setVisible(true);
 		nameSectionBarPanel.setVisible(true);

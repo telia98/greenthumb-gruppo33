@@ -32,7 +32,7 @@ public class ModalitaIrrigazione extends JPanel {
 	private static final long serialVersionUID = 1L;
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
-	JPanel testoPanel; //panel per la descrizione di cosa si andrà a fare
+	JPanel testoPanel; //panel per la descrizione di cosa si andrï¿½ a fare
 	JPanel testoPanel2;
 	JPanel automaticaPanel; //panel con bottone automatica
 	JPanel manualePanel; // panel con bottone manuale
@@ -88,15 +88,6 @@ public class ModalitaIrrigazione extends JPanel {
 					logo.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
 					logo.setVisible(true);
 					logo.invalidate();
-					
-					//recupero immagine del bottone di uscita
-					Image exitImg=ImageIO.read(new File("img/exit.png"));
-					exitImg=exitImg.getScaledInstance(40,40,Image.SCALE_SMOOTH);
-					ImageIcon exitIcon=new ImageIcon(exitImg);
-					exit.setIcon(exitIcon); 
-					exit.setBorder(null); 
-					exit.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-					exit.setVisible(true);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -131,7 +122,7 @@ public class ModalitaIrrigazione extends JPanel {
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(logo);
 				upBarPanel.add(new JLabel(""));
-				upBarPanel.add(exit);
+				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(new JLabel(""));
 				upBarPanel.add(appName);
@@ -149,13 +140,13 @@ public class ModalitaIrrigazione extends JPanel {
 				//fine elementi nameSectionBarPanel
 				
 				//inizio elementi testoPanel
-				JLabel info = new JLabel("<html><center>Abilita la modalità<br>con cui desideri irrigare.<br><br><br></center></html>");
+				JLabel info = new JLabel("<html><center>Abilita la modalita'<br>con cui desideri irrigare.<br><br><br></center></html>");
 				info.setFont(font);
 				testoPanel.add(info,BorderLayout.NORTH);
 				//fine elementi testoPanel
 				
 				//inizio testoPanel 2
-				JLabel info2 = new JLabel("<html><center>N.B. La modalità automatica è selezionabile solo se<br>è stato giò aggiunto un programma di irrigazione.<br><br><br></center></html>");
+				JLabel info2 = new JLabel("<html><center>N.B. La modalita' automatica eÃ¨ selezionabile solo se<br>e' stato gia' aggiunto un programma di irrigazione.<br><br><br></center></html>");
 				info2.setFont(fontMin);
 				testoPanel2.add(info2,BorderLayout.NORTH);
 				//fine testoPanel 2
@@ -182,7 +173,7 @@ public class ModalitaIrrigazione extends JPanel {
 					public void actionPerformed(ActionEvent event) {
 						if(manuale.isSelected()) {
 							frame.add(new ImpostaTimer(frame)); 
-							JOptionPane.showMessageDialog(null, "<html>Imposta la durata:<br>dell'irrigazione di oggi.</html>","Message",1);
+							JOptionPane.showMessageDialog(null, "<html>Imposta la durata<br>dell'irrigazione di oggi.</html>","Message",1);
 							setVisible(false);
 							
 						} else
