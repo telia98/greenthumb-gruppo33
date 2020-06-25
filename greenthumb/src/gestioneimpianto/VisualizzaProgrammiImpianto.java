@@ -140,12 +140,14 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		
 		//inizio elementi infoPanel
 		JLabel info=new JLabel(impianto.getNome());
-		info.setFont(fontSmall);
+		info.setFont(fontMedium);
 		infoPanel.add(info);
 		//fine elementi infoPanel
 		
 		//inizio elementi programmiPanel
-		JLabel selection=new JLabel("Lista programmi: ");
+		JLabel selection=new JLabel("<html>Seleziona dalla lista il programma d'irrigazione<br>di cui vuoi visualizzare i dettagli</html>");
+		selection.setFont(font);
+		selection.setForeground(new Color(89,105,109));
 		JComboBox<String> comboprogrammi=new JComboBox<String>();
 		comboprogrammi.addItem("");
 		ArrayList<ProgrammaIrrigazione> lista=Tester.getProgrammi();
@@ -175,46 +177,22 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		//fine elementi programmiPanel
 		
 		//inizio elementi infoProgramma
-		JLabel nomeProgramma = new JLabel();
-		JLabel getto = new JLabel();
-		JLabel rotazioneGetto = new JLabel();
-		JLabel hInizio = new JLabel();
-		JLabel hFine = new JLabel();
-		JLabel tipologia = new JLabel();
+		JLabel dettagliProgramma = new JLabel();
 		
 		if (programma!=null) {
-			nomeProgramma.setText("Programma: " + programma.getNome());
-			getto.setText("Potenza del getto d'acqua: " + String.valueOf(programma.getPotenzaGetto()));
+			String prog="<html>Programma: " + programma.getNome() + "<br>Tipologia: " + programma.getTipologia() + "<br>Potenza: " + String.valueOf(programma.getPotenzaGetto()) + " e rotazione: ";
 			Boolean rotazione=programma.isRotazioneGetto();
 			if (rotazione!=false)
-				rotazioneGetto.setText("Rotazione getto: " + "ON");
+				prog+="ON<br>";
 			else
-				rotazioneGetto.setText("Rotazione getto: " + "OFF");
-			hInizio.setText("Orario d'inizio irrigazione: " + programma.getOraInizio().toString());
-			hFine.setText("Orario di fine irrigazione: " + programma.getOraFine().toString());
-			tipologia.setText("Tipologia irrigazione: " + programma.getTipologia());
+				prog+="OFF<br>";
+			prog+="Orario irrigazione: " + programma.getOraInizio().toString() + " - " + programma.getOraFine().toString() + "</html>";
+			dettagliProgramma.setText(prog);
 		
-			infoProgramma.setLayout(new GridLayout(6,1));
-			infoProgramma.add(nomeProgramma);
-			infoProgramma.add(getto);
-			infoProgramma.add(rotazioneGetto);
-			infoProgramma.add(hInizio);
-			infoProgramma.add(hFine);
-			infoProgramma.add(tipologia);
+			infoProgramma.add(dettagliProgramma);
 		} else {
-			nomeProgramma=new JLabel("");
-			getto=new JLabel("");
-			hInizio=new JLabel("");
-			hFine=new JLabel("");
-			tipologia=new JLabel("");
-			
-			infoProgramma.setLayout(new GridLayout(6,1));
-			infoProgramma.add(nomeProgramma);
-			infoProgramma.add(getto);
-			infoProgramma.add(rotazioneGetto);
-			infoProgramma.add(hInizio);
-			infoProgramma.add(hFine);
-			infoProgramma.add(tipologia);
+			dettagliProgramma=new JLabel("");
+			infoProgramma.add(dettagliProgramma);
 		}
 		//fine elementi infoProgramma
 
@@ -244,6 +222,9 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		//fine elementi modificaPanel
 		
 		//inizio elementi aggiungiPanel
+		JLabel dettagli=new JLabel("<html><center>Clicca il bottone per aggiungere<br>un nuovo programma d'irrigazione</center></html>");
+		dettagli.setFont(font);
+		dettagli.setForeground(new Color(89,105,109));
 		JButton aggiungi=new JButton("aggiungi nuovo programma");
 		
 		class AggiungiListener implements ActionListener {
@@ -260,6 +241,7 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		aggiungi.setFont(fontMedium);
 		aggiungi.setFocusPainted(false); 
 		aggiungi.setVisible(true);
+		aggiungiPanel.add(dettagli);
 		aggiungiPanel.add(aggiungi);
 		//fine elementi aggiungiPanel
 		

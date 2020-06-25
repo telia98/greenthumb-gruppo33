@@ -196,6 +196,7 @@ public class ImpostazioniProgramma extends JPanel {
 		
 		//inizio elementi nomeProgrammaPanel
 		JLabel nomeP=new JLabel("nome programma");
+		nomeP.setFont(font);
 		JTextField inputNome=new JTextField("",10);
 		if (programma!=null) {
 			inputNome.setText(programma.getNome());
@@ -206,6 +207,7 @@ public class ImpostazioniProgramma extends JPanel {
 		
 		//inizio elementi gettoPanel
 		JLabel getto=new JLabel("potenza del getto d'acqua (scala 1-15)");
+		getto.setFont(font);
 		JTextField inputGetto=new JTextField("",3);
 		if (programma!=null) {
 			inputGetto.setText(String.valueOf(programma.getPotenzaGetto()));
@@ -216,6 +218,7 @@ public class ImpostazioniProgramma extends JPanel {
 		
 		//inizio elementi rotazionePanel
 		JLabel rotazione=new JLabel("rotazione idrante");
+		rotazione.setFont(font);
 		JRadioButton onOff=new JRadioButton();
 		if (programma!=null) {
 			if (programma.isRotazioneGetto()==false)
@@ -230,6 +233,7 @@ public class ImpostazioniProgramma extends JPanel {
 		
 		//inizio elementi inizioFinePanel
 		JLabel inizio=new JLabel("ora di inizio irrigazione");
+		inizio.setFont(font);
 		JComboBox comboH=new JComboBox();
 		for(int i=0;i<24;i++) 
 			comboH.addItem(i);
@@ -244,6 +248,7 @@ public class ImpostazioniProgramma extends JPanel {
 		inizioFinePanel.add(comboMin);
 
 		JLabel fine=new JLabel("ora di fine irrigazione");
+		fine.setFont(font);
 		JComboBox comboHF=new JComboBox();
 		for(int i=0;i<24;i++) 
 			comboHF.addItem(i);
@@ -357,7 +362,7 @@ public class ImpostazioniProgramma extends JPanel {
 						
 						JOptionPane.showMessageDialog(null,"<html>Il nuovo programma d'irrigazione<br>è stato inserito con successo</html>","Message",1);
 						setVisible(false);
-						frame.add(new GestioneImpianto(frame));
+						frame.add(new VisualizzaProgrammiImpianto(frame,programma.getImpianto(),programma));
 					}
 				}
 			}
