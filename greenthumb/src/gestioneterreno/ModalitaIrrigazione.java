@@ -25,6 +25,7 @@ import amministrazione.Amministrazione;
 import general.Homepage;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
+import utility.Impianto;
 
 public class ModalitaIrrigazione extends JPanel {
 	
@@ -39,7 +40,7 @@ public class ModalitaIrrigazione extends JPanel {
 	JPanel downBarPanel; //barra delle icone delle sezioni
 	JPanel imgPanel; //pannello per l'immagine della sezione
 	
-	public ModalitaIrrigazione (JFrame frame, String impianto) {
+	public ModalitaIrrigazione (JFrame frame, Impianto impianto) {
 		
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
@@ -179,8 +180,6 @@ public class ModalitaIrrigazione extends JPanel {
 				class ButtonGroupListener implements ActionListener {
 					
 					public void actionPerformed(ActionEvent event) {
-						
-						
 						if(manuale.isSelected()) {
 							frame.add(new ImpostaTimer(frame)); 
 							JOptionPane.showMessageDialog(null, "<html>Imposta la durata:<br>dell'irrigazione di oggi.</html>","Message",1);
@@ -190,9 +189,7 @@ public class ModalitaIrrigazione extends JPanel {
 						
 							if(automatica.isSelected()) {
 								setVisible(false);
-								frame.add(new ModalitaAutomatica(frame)); 
-							
-							
+								frame.add(new ModalitaAutomatica(frame,impianto,null)); 
 						}
 						
 					}

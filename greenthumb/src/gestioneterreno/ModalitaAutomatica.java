@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -18,12 +19,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.Tester;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
+import utility.Impianto;
+import utility.ProgrammaIrrigazione;
 
 public class ModalitaAutomatica extends JPanel{
 	
@@ -32,14 +37,13 @@ public class ModalitaAutomatica extends JPanel{
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
 	JPanel testoPanel; //panel per la descrizione di cosa si andrà a fare
 	JPanel dropdownPanel; //panel per la selezione del programma
-	JPanel descPanel; //panel con testo 
-	JPanel testoPanel2; // panel con info del programma
+	JPanel textAreaPanel; 
+	JPanel textAreaPanel2; 
 	JPanel attivaPanel; // panel con bottone attiva
 	JPanel downBarPanel; //barra delle icone delle sezioni
-	JPanel imgPanel; //pannello per l'immagine della sezione
 	
-	public ModalitaAutomatica(JFrame frame) {
-		
+	public ModalitaAutomatica(JFrame frame,Impianto impianto, ProgrammaIrrigazione pr) {
+	System.out.println(pr);	
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -47,24 +51,23 @@ public class ModalitaAutomatica extends JPanel{
 		Font fontMin = new Font("Comic sans", Font.PLAIN, 10);
 		Font fontMax = new Font("Comic sans", Font.PLAIN, 16); 
 		
+		
 		upBarPanel=new JPanel();
 		upBarPanel.setBackground(Color.WHITE);
 		nameSectionBarPanel=new JPanel();
 		nameSectionBarPanel.setBackground(Color.WHITE);
 		testoPanel= new JPanel();
 		testoPanel.setBackground(Color.WHITE);
-		testoPanel2= new JPanel();
-		testoPanel2.setBackground(Color.WHITE);
 		dropdownPanel=new JPanel();
 		dropdownPanel.setBackground(Color.WHITE);
-		descPanel= new JPanel();
-		descPanel.setBackground(Color.WHITE);
+		textAreaPanel=new JPanel();
+		textAreaPanel.setBackground(Color.WHITE);
+		textAreaPanel2=new JPanel();
+		textAreaPanel2.setBackground(Color.WHITE);
 		attivaPanel= new JPanel();
 		attivaPanel.setBackground(Color.WHITE);
 		downBarPanel=new JPanel();
 		downBarPanel.setBackground(Color.WHITE);
-		imgPanel=new JPanel();
-		imgPanel.setBackground(Color.WHITE);
 		
 		//inizio elementi upBarPanel
 		JButton logo=new JButton();		
@@ -156,41 +159,77 @@ public class ModalitaAutomatica extends JPanel{
 		
 		
 		//inizio elementi dropdownPanel
+		
 		JComboBox<String> selezioneProgramma = new JComboBox<String>();
 		selezioneProgramma.addItem("");
-		selezioneProgramma.addItem("programma 1");
-		selezioneProgramma.addItem("programma 2");
-		selezioneProgramma.setEditable(false);
 		
-		dropdownPanel.add(selezioneProgramma);
-		//fine elementi dropdownPanel
-		
-		
-		//inizio elementi descPanel
-		JLabel desc = new JLabel("<html><center>Programma selezionato: <br><br><br></center></html>");
-		desc.setFont(fontMax);
-		descPanel.add(desc,BorderLayout.NORTH);
-		//fine elementi descPanel
-		
-		
-		//inizio elementi testoPanel2
-		JLabel dati = new JLabel("<html><center>Dati tecnici impianto: <br><br><br></center></html>");
-		dati.setFont(fontMin);
-		JTextArea ta= new JTextArea(); 
-		ta.setEditable(false);
-		
-		JLabel dati2 = new JLabel("<html><center>Info programma: <br><br><br></center></html>");
-		dati2.setFont(fontMin);
-		JTextArea ta2= new JTextArea(); 
-		ta2.setEditable(false);
-		
-		testoPanel2.add(dati,BorderLayout.NORTH);
-		testoPanel2.add(ta,BorderLayout.SOUTH);
-		testoPanel2.add(dati2,BorderLayout.NORTH);
-		testoPanel2.add(ta2,BorderLayout.SOUTH);
-		//fine elementi testoPanel2
-		
-		
+		ArrayList<ProgrammaIrrigazione> listaP = Tester.getProgrammi(); 
+			for(ProgrammaIrrigazione p: listaP) {
+				if (p.getImpianto().equals(impianto))
+					selezioneProgramma.addItem(p.getNome());
+			}
+	
+			
+			dropdownPanel.add(selezioneProgramma, BorderLayout.NORTH);
+			//fine elementi dropdownPanel
+			
+			//inizio elementi textAreaPanel
+			Impianto imp=null;
+			String prog="";
+			String impiantoo="";
+			
+			if(pr!=null) {
+					 imp= pr.getImpianto();
+					 imp.getCodice();
+					 imp.getNome();
+					 imp.getCitta();
+					 imp.getVia();
+					 imp.getCivico();
+					 impiantoo="<br>Codice:" +imp.getCodice() + " - nome:" +  imp.getNome()  
+					 	+ "<br>locazione:" + imp.getCitta()+ ", " +  imp.getVia() + imp.getCivico() + "</html>"; 
+					 
+					 pr.getOraInizio();
+					 pr.getOraFine();
+					 pr.getTipologia();
+					 pr.getPotenzaGetto();
+					 pr.isRotazioneGetto();
+					 prog="<br>ora inizio:" +pr.getOraInizio() + "- ora fine:" +  pr.getOraFine()  
+							 	+ "<br>" + pr.getTipologia()+ " con potenza " +  pr.getPotenzaGetto() 
+							 		+",rotazione "; 
+					if(pr.isRotazioneGetto())
+						prog=prog + "ON</html>";
+					else
+						prog=prog +"OFF</html>";
+					JLabel dati = new JLabel("<html>Dati tecnici impianto:" + impiantoo);//text area dove verranno caricati i dati impianto con l'action listener
+					dati.setFont(font);
+					dati.setVisible(true);
+					textAreaPanel.add(dati,BorderLayout.EAST);
+						
+					JLabel dati2 = new JLabel("<html>Info programma:" + prog); //text area dove verranno caricate le info del programma con l'action listener
+					dati2.setFont(font);
+					dati2.setVisible(true);
+					textAreaPanel2.add(dati2,BorderLayout.EAST);
+			}	
+
+			class ComboBoxListener implements ActionListener {
+				
+				public void actionPerformed(ActionEvent event) {
+					String prog=(String) selezioneProgramma.getSelectedItem();
+					ArrayList<ProgrammaIrrigazione> lista = Tester.getProgrammi(); 
+					
+					for(ProgrammaIrrigazione p: lista) {
+						if(p.getNome().equals(prog)) {
+							setVisible(false);
+							frame.add(new ModalitaAutomatica(frame,impianto,p));
+						}
+					}
+					
+				}
+			}
+			
+			ActionListener list= new ComboBoxListener();
+			selezioneProgramma.addActionListener(list);	
+	
 		//inizio elementi attivaPanel
 		JButton attiva = new JButton("Attiva ora"); 	
 		attivaPanel.add(attiva);
@@ -199,26 +238,21 @@ public class ModalitaAutomatica extends JPanel{
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				String s= (String) selezioneProgramma.getSelectedItem(); 
+				if(pr!=null) {
 				
-				if(s.equals("programma 1")) {
-					
-					ta.setText("Info relative all'impianto 1");
-					ta2.setText("Info relative al programma 1");
+				JOptionPane.showMessageDialog(null, "<html>ATTENZIONE! Il programma è stato impostato correttamente.<br></html>","Message",1);
+				setVisible(false);
+				frame.add(new GestioneTerreno(frame)); 
+				
 				} else 
 					
-					ta.setText("Info relative all'impianto 2");
-					ta2.setText("Info relative al programma 2");
-				
+					JOptionPane.showMessageDialog(null, "<html>ATTENZIONE! Non hai selezionato nessun programma da attivare.<br></html>","Message",1);
 			}
 		}
 		
 		ActionListener actli = new ButtonListener(); 
 		attiva.addActionListener(actli);
 		//fine elementi attivaPanel
-		
-		
-		
 		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
@@ -331,28 +365,21 @@ public class ModalitaAutomatica extends JPanel{
 		nameSectionBarPanel.setVisible(true);
 		testoPanel.setVisible(true);
 		dropdownPanel.setVisible(true);
-		descPanel.setVisible(true);
-		testoPanel2.setVisible(true);
+		textAreaPanel.setVisible(true);
+		textAreaPanel2.setVisible(true);
 		attivaPanel.setVisible(true);
-
-		
 		downBarPanel.setVisible(true);
-		imgPanel.setVisible(true);
 		
-		setLayout(new GridLayout(9,1));
+		setLayout(new GridLayout(8,1));
 		
 		add(upBarPanel);
 		add(nameSectionBarPanel);
-		add(imgPanel);
 		add(testoPanel);
 		add(dropdownPanel);
-		
-		add(descPanel);
-		add(testoPanel2);
+		add(textAreaPanel);
+		add(textAreaPanel2);
 		add(attivaPanel);
-
 		add(downBarPanel);
-		
 	}
 
 }
