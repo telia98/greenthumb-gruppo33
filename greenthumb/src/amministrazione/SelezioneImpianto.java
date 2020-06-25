@@ -1,5 +1,7 @@
 package amministrazione;
 
+import utility.Impianto;
+import general.Tester;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +11,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -22,8 +25,10 @@ import javax.swing.JPanel;
 import gestioneterreno.GestioneTerreno;
 import general.Homepage;
 import general.Login;
+import general.Tester;
 import gestioneimpianto.GestioneImpianto;
 import statopiante.StatoPiante;
+import utility.Impianto;
 
 public class SelezioneImpianto extends JPanel {
 
@@ -130,7 +135,7 @@ public class SelezioneImpianto extends JPanel {
 		//inizio elementi nameSectionBarPanel
 		JLabel sectionName=new JLabel("<html><center>seleziona impianto</center></html>");
 		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(0,138,177));
+		sectionName.setForeground(new Color(230,202,60));
 		
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
@@ -144,34 +149,33 @@ public class SelezioneImpianto extends JPanel {
 		//fine elementi contenutoPanel
 		
 		//inizio elementi ComboPanel
-		JComboBox<String> listaimpianti= new JComboBox<String>();
-		listaimpianti.addItem("");
-		listaimpianti.addItem("impianto 1");
-		listaimpianti.addItem("impianto 2");
-		listaimpianti.setEditable(false);
-		ComboPanel.add(listaimpianti);
+		JComboBox<String> selezioneImpianto= new JComboBox<String>();
+		selezioneImpianto.addItem("");
+		ArrayList<Impianto>lista=Tester.getImpianti();
+		for(Impianto i: lista) {
+			selezioneImpianto.addItem(i.getNome());
+		}
+		selezioneImpianto.setEditable(false);
+		ComboPanel.add(selezioneImpianto);
 		
 		class ComboListener implements ActionListener{
 			public void actionPerformed(ActionEvent event) {
-				String op= (String) listaimpianti.getSelectedItem();
-				
-				if(op.contentEquals("impianto 1")) {
-					JOptionPane.showMessageDialog(null,"<html> Hai selezionato: <br>impianto 1</html", "Message", 1);
-					setVisible(false);
-					frame.add(new SelezioneImp1(frame));
+				String n= (String) selezioneImpianto.getSelectedItem();
+				ArrayList<Impianto> listaImpianti= Tester.getImpianti();
+				for(Impianto i: listaImpianti) {
+					if(i.getNome().equals(n)) {
+						JOptionPane.showMessageDialog(null,"<html> Impianto selezionato</html", "Message", 1);
+						setVisible(false);
+						
+						frame.add(new SelezioneImp1(frame,i));
+					}
 				}
-				if(op.contentEquals("impianto 2")) {
-					JOptionPane.showMessageDialog(null,"<html> Hai selezionato: <br>impianto 2</html", "Message", 1);
-					setVisible(false);
-					frame.add(new SelezioneImp2(frame));
-				}
-				
-				
+					
 			}
 		}
 		
-		ActionListener listener= new ComboListener();
-		listaimpianti.addActionListener(listener);
+		ActionListener list= new ComboListener();
+		selezioneImpianto.addActionListener(list);
 
 		
 		//inizio elementi downBarPanel
@@ -279,9 +283,9 @@ public class SelezioneImpianto extends JPanel {
 		setLayout(new GridLayout(6,1));
 		add(upBarPanel);
 		add(nameSectionBarPanel);
-		add(imgPanel);
 		add(contenutoPanel);
 		add(ComboPanel);
+		add(imgPanel);
 		add(downBarPanel);
 	}
 }

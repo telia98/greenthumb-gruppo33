@@ -1,5 +1,6 @@
 package amministrazione;
 
+import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -42,11 +43,12 @@ public class SelezioneImp1 extends JPanel {
 	JPanel contenuto2Panel;
 	
 	
-	public SelezioneImp1(JFrame frame) {
+	public SelezioneImp1(JFrame frame, Impianto impianto) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
 		Font font = new Font("Comic sans", Font.PLAIN, 13);
+		
 		
 		upBarPanel=new JPanel();
 		upBarPanel.setBackground(Color.WHITE);
@@ -136,9 +138,9 @@ public class SelezioneImp1 extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>spese impianto 1</center></html>");
+		JLabel sectionName=new JLabel("<html><center>spese impianto</center></html>");
 		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(0,138,177));
+		sectionName.setForeground(new Color(230,202,60));
 		
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
@@ -156,6 +158,7 @@ public class SelezioneImp1 extends JPanel {
 		contenutoPanel.add(infoAppa,BorderLayout.NORTH);
 		
 		JButton button1= new JButton("OFF");
+		button1.setForeground(new Color(230,202,60));
 		contenutoPanel.add(button1);
 		
 		button1.addActionListener(
@@ -163,7 +166,7 @@ public class SelezioneImp1 extends JPanel {
 			        public void actionPerformed(ActionEvent e) {
 			        	JOptionPane.showMessageDialog(null,"<html> parametro budget attivato </html", "Message", 1);
 						setVisible(false);
-						frame.add(new SpeseImp1(frame));
+						frame.add(new SpeseImp1(frame, impianto));
 			        }
 			    } 
 			);
@@ -175,6 +178,7 @@ public class SelezioneImp1 extends JPanel {
 		contenuto2Panel.add(infoAppa2,BorderLayout.NORTH);
 		
 		JButton button= new JButton("?");
+		button.setForeground(new Color(230,202,60));
 		contenuto2Panel.add(button);
 		
 		button.addActionListener(
@@ -182,7 +186,7 @@ public class SelezioneImp1 extends JPanel {
 			        public void actionPerformed(ActionEvent e) {
 			        	JOptionPane.showMessageDialog(null,"<html> PARAMETRO NUMERICO<br>entro il quale i costi di irrigazione devono rientrare</html", "Message", 1);
 						setVisible(true);
-						frame.add(new SelezioneImp1(frame));
+						frame.add(new SelezioneImp1(frame, impianto));
 			        }
 			    }
 			);

@@ -1,5 +1,6 @@
 package amministrazione;
 
+import utility.Impianto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -41,9 +42,10 @@ public class SpeseImp1 extends JPanel {
 	JPanel emptyPanel;
 	JPanel imgPanel; //pannello per l'immagine della sezione
 	JPanel contenuto2Panel;
+	JPanel newPanel;
 	
 	
-	public SpeseImp1(JFrame frame) {
+	public SpeseImp1(JFrame frame, Impianto impianto) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
@@ -63,6 +65,8 @@ public class SpeseImp1 extends JPanel {
 		imgPanel.setBackground(Color.WHITE);
 		contenuto2Panel=new JPanel();
 		contenuto2Panel.setBackground(Color.WHITE);
+		newPanel=new JPanel();
+		newPanel.setBackground(Color.WHITE);
 		
 		//inizio elementi upBarPanel
 		JButton logo=new JButton();		
@@ -137,9 +141,9 @@ public class SpeseImp1 extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>spese impianto 1</center></html>");
+		JLabel sectionName=new JLabel("<html><center>spese impianto</center></html>");
 		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(0,138,177));
+		sectionName.setForeground(new Color(230,202,60));
 		
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
@@ -157,6 +161,7 @@ public class SpeseImp1 extends JPanel {
 		contenutoPanel.add(infoAppa,BorderLayout.NORTH);
 		
 		JButton button1= new JButton("ON");
+		button1.setForeground(new Color(230,202,60));
 		contenutoPanel.add(button1);
 		
 		button1.addActionListener(
@@ -164,17 +169,26 @@ public class SpeseImp1 extends JPanel {
 			        public void actionPerformed(ActionEvent e) {
 			        	JOptionPane.showMessageDialog(null,"<html> parametro budget disattivato </html", "Message", 1);
 						setVisible(false);
-						frame.add(new SelezioneImp1(frame));
+						frame.add(new SelezioneImp1(frame, impianto));
 			        }
 			    } 
 			);
 		//fine elementi contenutoPanel
+		
+		
+		//inizio newPanel
+		JLabel infoAppk = new JLabel("<html><center>deve essere privo di punteggiatura</center></html>");
+		infoAppk.setFont(font);
+		newPanel.add(infoAppk,BorderLayout.NORTH);
+		//fine newPanel
+		
 		
 		//inizio elementi contenuto2Panel
 		JTextField etat = new JTextField( 10);
 		contenuto2Panel.add(etat);
 		
 		JButton button2= new JButton("PROCEDI");
+		button2.setForeground(new Color(230,202,60));
 		contenuto2Panel.add(button2);
 		
 		
@@ -192,15 +206,15 @@ public class SpeseImp1 extends JPanel {
 	    			        	int bolletta= 1000;
 	    			        	
 	    			        	if(bolletta <= etad) { 
-	    			        	JOptionPane.showMessageDialog(null,"<html> costo sostenuto inferiore al budget </html", "Message", 1);
+	    			        	JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
 	    						setVisible(false);
-	    						frame.add(new SegnaleVerdeImp1(frame));
+	    						frame.add(new SegnaleVerdeImp1(frame, impianto));
 	    			        	}
 	    						
 	    						else if(bolletta > etad)  {
-	    			        	JOptionPane.showMessageDialog(null,"<html> costo sostenuto superiore al budget </html", "Message", 1);
+	    			        	JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
 	    						setVisible(false);
-	    						frame.add(new SegnaleRossoImp1(frame));
+	    						frame.add(new SegnaleRossoImp1(frame, impianto));
 	    						}
 	    			        }
 	    			    } 
@@ -322,11 +336,13 @@ public class SpeseImp1 extends JPanel {
 		emptyPanel.setVisible(true);
 		downBarPanel.setVisible(true);
 		imgPanel.setVisible(true);
-		setLayout(new GridLayout(7,1));
+		newPanel.setVisible(true);
+		setLayout(new GridLayout(8,1));
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(imgPanel);
 		add(contenutoPanel);
+		add(newPanel);
 		add(contenuto2Panel);
 		add(emptyPanel);
 		add(downBarPanel);
