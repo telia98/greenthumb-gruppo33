@@ -10,49 +10,57 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import amministrazione.Amministrazione;
 import general.Homepage;
 import gestioneimpianto.GestioneImpianto;
 import gestioneterreno.GestioneTerreno;
 
-public class StatoPiante extends JPanel {
+public class ModificaAgrofarmaci extends JPanel {
+	
 	private static final long serialVersionUID = 1L;
+	
+	public static ArrayList<String> farmaco = new ArrayList<String>();
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
-	JPanel contenutoPanel; //contenuto della schermata
+	JPanel miscelaAgrofarmaciPanel; //contenuto seconda parte della schermata
 	JPanel downBarPanel; //barra delle icone delle sezioni
-	JPanel selezione2Panel;
-	JPanel empty2Panel;
+	JPanel modificaPanel; //bottone ottimizza
 	JPanel imgPanel; //pannello per l'immagine della sezione
-
-	public StatoPiante(JFrame frame) {
-		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
+	JPanel miscelaAgrofarmaci2Panel;//contesuto seconda parte della schermata
+	
+	public ModificaAgrofarmaci (JFrame frame) {
+		
+		//Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
-		//Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
+		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
 		Font font = new Font("Comic sans", Font.PLAIN, 13);
+		
+		
 		
 		upBarPanel=new JPanel();
 		upBarPanel.setBackground(Color.WHITE);
 		nameSectionBarPanel=new JPanel();
 		nameSectionBarPanel.setBackground(Color.WHITE);
-		contenutoPanel=new JPanel();
-		contenutoPanel.setBackground(Color.WHITE);
+		miscelaAgrofarmaciPanel=new JPanel();
+		miscelaAgrofarmaciPanel.setBackground(Color.WHITE);
 		downBarPanel=new JPanel();
 		downBarPanel.setBackground(Color.WHITE);
-		selezione2Panel=new JPanel();
-		selezione2Panel.setBackground(Color.WHITE);
-		empty2Panel=new JPanel();
-		empty2Panel.setBackground(Color.WHITE);
+		modificaPanel=new JPanel();
+		modificaPanel.setBackground(Color.WHITE);
 		imgPanel=new JPanel();
 		imgPanel.setBackground(Color.WHITE);
+		miscelaAgrofarmaci2Panel=new JPanel();
+		miscelaAgrofarmaci2Panel.setBackground(Color.WHITE);
 		
 		//inizio elementi upBarPanel
 		JButton logo=new JButton();		
@@ -127,75 +135,119 @@ public class StatoPiante extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>Gestione Piante</center></html>");
-		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(96,202,92));
-		
+		JLabel sectionName=new JLabel("<html><center>Stato Attuale</center></html>");
+		sectionName.setFont(fontMedium);
+		sectionName.setForeground(new Color(92,202,98));
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
 		//fine elementi nameSectionBarPanel
 		
+		
 		//inizio elementi imgPanel
-		JButton immagine=new JButton();
-		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
-
-		try {
-			Image img=ImageIO.read(new File("img/manoPianta.png"));
-			img=img.getScaledInstance(75,75,Image.SCALE_SMOOTH);
-			ImageIcon iconaimg=new ImageIcon(img);
-			immagine.setIcon(iconaimg); 
-			immagine.setBorder(null); 
-			immagine.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			immagine.setVisible(true);
-			immagine.invalidate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		imgPanel.add(immagine);
+		
+		JLabel testo=new JLabel("<html><center>elimina o aggiungi agrofarmaci alla miscela</center></html>");
+		testo.setFont(font);
+		testo.setForeground(new Color(92,202,98));
+		testo.setVisible(true);
+		imgPanel.add(testo);
 		//fine elementi imgPanel
 		
-		//inizio elementi contenutoPanel
-		JButton gotoStatoPiante=new JButton("Stato Piante >");
-		gotoStatoPiante.setFocusPainted(false);
-		gotoStatoPiante.setBorder(null); 
-		gotoStatoPiante.setFont(font);
-		gotoStatoPiante.setForeground(new Color(96,202,92));
-		selezione2Panel.add(gotoStatoPiante);
-		JButton gotoSpazio=new JButton("                                                                          ");
-		gotoSpazio.setFocusPainted(false);
-		gotoSpazio.setBorder(null); 
-		gotoSpazio.setFont(font);
-		gotoSpazio.setForeground(new Color(96,202,92));
-		selezione2Panel.add(gotoSpazio);
-		JButton gotoAgrofarmaci=new JButton("Agrofarmaci >");
-		gotoAgrofarmaci.setFocusPainted(false);
-		gotoAgrofarmaci.setBorder(null); 
-		gotoAgrofarmaci.setFont(font);
-		gotoAgrofarmaci.setForeground(new Color(96,202,92));
-		selezione2Panel.add(gotoAgrofarmaci);
 		
-		class StatoListener implements ActionListener {
+		//inizio elementi miscelaAgrofarmaci
+		miscelaAgrofarmaciPanel.setLayout(new GridLayout(3,3));
+		
+		JCheckBox enovit= new JCheckBox("enovit");
+		JCheckBox contraxs= new JCheckBox("contraxs stange");
+		JCheckBox quintamon= new JCheckBox("quintamon");
+		
+		miscelaAgrofarmaciPanel.add(enovit);
+		miscelaAgrofarmaciPanel.add(new JLabel(""));
+		miscelaAgrofarmaciPanel.add(contraxs);
+		miscelaAgrofarmaciPanel.add(new JLabel(""));
+		miscelaAgrofarmaciPanel.add(quintamon);
+		miscelaAgrofarmaciPanel.add(new JLabel(""));
+		
+	        
+	        if(enovit.isSelected()){  
+	            farmaco.add("enovit");
+	        }  
+	        if(contraxs.isSelected()){  
+	        	farmaco.add("contraxs stange");
+	        }  
+	        if(quintamon.isSelected()){  
+	        	farmaco.add("quintamon");
+	        }  
+		//fine elementi miscelaAgrofarmaci
+		
+		
+		
+		//inizio elementi miscelaAgrofarmaci2
+	    miscelaAgrofarmaci2Panel.setLayout(new GridLayout(3,3));
+	    
+		JCheckBox ziram= new JCheckBox("ziram 80");
+		JCheckBox diledit= new JCheckBox("diledit");
+		JCheckBox bromcid= new JCheckBox("bromcid");
+		
+		miscelaAgrofarmaci2Panel.add(ziram);
+		miscelaAgrofarmaci2Panel.add(new JLabel(""));
+		miscelaAgrofarmaci2Panel.add(diledit);
+		miscelaAgrofarmaci2Panel.add(new JLabel(""));
+		miscelaAgrofarmaci2Panel.add(bromcid);
+		
+		 
+	        if(ziram.isSelected()){  
+	        	farmaco.add("ziram 80");
+	        }  
+	        if(diledit.isSelected()){  
+	        	farmaco.add("ziram 80");
+	        }  
+	        if(bromcid.isSelected()){  
+	        	farmaco.add("ziram 80");
+	        }  
+		//fine elementi miscelaAgrofarmaci2
+	
+		
+		//inizio bottone modificaAgro
+		JButton modificaAgro=new JButton("conferma modifica");
+		modificaAgro.setForeground(new Color(96,202,92));
+		modificaAgro.setFont(fontMedium);
+		modificaAgro.setFocusPainted(false); 
+		modificaAgro.setVisible(true);
+		
+		class modificaAgroListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new SelezioneImpianto(frame));
-			}
+					if(enovit.isSelected()){  
+			            farmaco.add("enovit");
+			        }  
+			        if(contraxs.isSelected()){  
+			        	farmaco.add("contraxs stange");
+			        }  
+			        if(quintamon.isSelected()){  
+			        	farmaco.add("quintamon");
+			        }  
+			        if(ziram.isSelected()){  
+			        	farmaco.add("ziram 80");
+			        }  
+			        if(diledit.isSelected()){  
+			        	farmaco.add("ziram 80");
+			        }  
+			        if(bromcid.isSelected()){  
+			        	farmaco.add("ziram 80");
+			        }  
+					JOptionPane.showMessageDialog(null,"<html>la miscela è stata aggiunta con successo</html>","Message",1);
+					setVisible(false); //possibilita di mettere no???
+					frame.add(new Agrofarmaci(frame));
+				}
 		}
-		ActionListener statoListener=new StatoListener();
-		gotoStatoPiante.addActionListener(statoListener);
 		
-		class AgroListener implements ActionListener {
+		//collego il listener al bottone ottimizza
+		ActionListener modificaAgroListener=new modificaAgroListener();
+		modificaAgro.addActionListener(modificaAgroListener);
+		modificaPanel.add(modificaAgro);
+		//fine bottone ottimizza
 
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new ScegliImpianto(frame)); 
-			}
-		}
-		ActionListener agroListener=new AgroListener();
-		gotoAgrofarmaci.addActionListener(agroListener);
-		//fine elementi contenutoPanel
 		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
@@ -247,17 +299,6 @@ public class StatoPiante extends JPanel {
 			e.printStackTrace();
 		}
 		
-		//action listener per i bottoni
-		class AmministrazioneListener implements ActionListener {
-
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false); //rendo invisibile il pannello della homepage
-				frame.add(new Amministrazione(frame)); //aggiungiamo al frame il pannello del login
-			}
-		}
-		ActionListener amministrazioneListener=new AmministrazioneListener();
-		amministrazione.addActionListener(amministrazioneListener);
 		
 		class TerrenoListener implements ActionListener {
 
@@ -306,20 +347,23 @@ public class StatoPiante extends JPanel {
 		
 		upBarPanel.setVisible(true);
 		nameSectionBarPanel.setVisible(true);
-		contenutoPanel.setVisible(true);
-		selezione2Panel.setVisible(true);
-		empty2Panel.setVisible(true);
+		miscelaAgrofarmaciPanel.setVisible(true);
+		miscelaAgrofarmaci2Panel.setVisible(true);
+		modificaPanel.setVisible(true);
 		downBarPanel.setVisible(true);
 		imgPanel.setVisible(true);
 		setLayout(new GridLayout(7,1));
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(imgPanel);
-		add(contenutoPanel);
-		add(selezione2Panel);
-		add(empty2Panel);
+		add(miscelaAgrofarmaciPanel);
+		add(miscelaAgrofarmaci2Panel);
+		add(modificaPanel);
 		add(downBarPanel);
 		
+		
+		
 	}
-}
+	
 
+}
