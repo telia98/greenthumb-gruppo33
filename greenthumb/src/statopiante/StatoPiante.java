@@ -127,76 +127,76 @@ public class StatoPiante extends JPanel {
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>Gestione Piante</center></html>");
-		sectionName.setFont(fontBig);
-		sectionName.setForeground(new Color(96,202,92));
-		
-		sectionName.setVisible(true);
-		nameSectionBarPanel.add(sectionName);
-		//fine elementi nameSectionBarPanel
-		
-		//inizio elementi imgPanel
-		JButton immagine=new JButton();
-		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
+				JLabel sectionName=new JLabel("<html><center>Gestione Piante</center></html>");
+				sectionName.setFont(fontBig);
+				sectionName.setForeground(new Color(96,202,92));
+				
+				sectionName.setVisible(true);
+				nameSectionBarPanel.add(sectionName);
+				//fine elementi nameSectionBarPanel
+				
+				//inizio elementi imgPanel
+				JButton immagine=new JButton();
+				//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
 
-		try {
-			Image img=ImageIO.read(new File("img/manoPianta.png"));
-			img=img.getScaledInstance(75,75,Image.SCALE_SMOOTH);
-			ImageIcon iconaimg=new ImageIcon(img);
-			immagine.setIcon(iconaimg); 
-			immagine.setBorder(null); 
-			immagine.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
-			immagine.setVisible(true);
-			immagine.invalidate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		imgPanel.add(immagine);
-		//fine elementi imgPanel
-		
-		//inizio elementi contenutoPanel
-		JButton gotoStatoPiante=new JButton("Stato Piante >");
-		gotoStatoPiante.setFocusPainted(false);
-		gotoStatoPiante.setBorder(null); 
-		gotoStatoPiante.setFont(font);
-		gotoStatoPiante.setForeground(new Color(96,202,92));
-		selezione2Panel.add(gotoStatoPiante);
-		JButton gotoSpazio=new JButton("                                                                          ");
-		gotoSpazio.setFocusPainted(false);
-		gotoSpazio.setBorder(null); 
-		gotoSpazio.setFont(font);
-		gotoSpazio.setForeground(new Color(96,202,92));
-		selezione2Panel.add(gotoSpazio);
-		JButton gotoAgrofarmaci=new JButton("Agrofarmaci >");
-		gotoAgrofarmaci.setFocusPainted(false);
-		gotoAgrofarmaci.setBorder(null); 
-		gotoAgrofarmaci.setFont(font);
-		gotoAgrofarmaci.setForeground(new Color(96,202,92));
-		selezione2Panel.add(gotoAgrofarmaci);
-		
-		class StatoListener implements ActionListener {
+				try {
+					Image img=ImageIO.read(new File("img/manoPianta.png"));
+					img=img.getScaledInstance(75,75,Image.SCALE_SMOOTH);
+					ImageIcon iconaimg=new ImageIcon(img);
+					immagine.setIcon(iconaimg); 
+					immagine.setBorder(null); 
+					immagine.setFocusPainted(false); //per non far uscire i bordi blu del bottone quando selezionato
+					immagine.setVisible(true);
+					immagine.invalidate();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				imgPanel.add(immagine);
+				//fine elementi imgPanel
+				
+				//inizio elementi contenutoPanel
+				JButton gotoStatoPiante=new JButton("Stato Piante >");
+				gotoStatoPiante.setFocusPainted(false);
+				gotoStatoPiante.setBorder(null); 
+				gotoStatoPiante.setFont(font);
+				gotoStatoPiante.setForeground(new Color(96,202,92));
+				selezione2Panel.add(gotoStatoPiante);
+				JButton gotoSpazio=new JButton("                                                                          ");
+				gotoSpazio.setFocusPainted(false);
+				gotoSpazio.setBorder(null); 
+				gotoSpazio.setFont(font);
+				gotoSpazio.setForeground(new Color(96,202,92));
+				selezione2Panel.add(gotoSpazio);
+				JButton gotoAgrofarmaci=new JButton("Agrofarmaci >");
+				gotoAgrofarmaci.setFocusPainted(false);
+				gotoAgrofarmaci.setBorder(null); 
+				gotoAgrofarmaci.setFont(font);
+				gotoAgrofarmaci.setForeground(new Color(96,202,92));
+				selezione2Panel.add(gotoAgrofarmaci);
+				
+				class StatoListener implements ActionListener {
 
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new SelezioneImpianto(frame));
-			}
-		}
-		ActionListener statoListener=new StatoListener();
-		gotoStatoPiante.addActionListener(statoListener);
-		
-		class AgroListener implements ActionListener {
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						setVisible(false);
+						frame.add(new SelezioneImpianto(frame));
+					}
+				}
+				ActionListener statoListener=new StatoListener();
+				gotoStatoPiante.addActionListener(statoListener);
+				
+				class AgroListener implements ActionListener {
 
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-				frame.add(new ScegliImpianto(frame)); 
-			}
-		}
-		ActionListener agroListener=new AgroListener();
-		gotoAgrofarmaci.addActionListener(agroListener);
-		//fine elementi contenutoPanel
-		
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						setVisible(false);
+						frame.add(new ScegliImpianto(frame)); 
+					}
+				}
+				ActionListener agroListener=new AgroListener();
+				gotoAgrofarmaci.addActionListener(agroListener);
+				//fine elementi contenutoPanel
+				
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
 		amministrazione.setPreferredSize(new Dimension(150,200));

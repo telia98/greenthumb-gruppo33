@@ -2,7 +2,6 @@ package statopiante;
 
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -222,10 +221,16 @@ public class StatoPiante2 extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-					JOptionPane.showMessageDialog(null,"<html>vuoi procedere<br>all'ottimizzazione del<br>del programma?</html>","Message",1);
-					setVisible(false); //possibilita di mettere no???
-					frame.add(new GestioneImpianto(frame));//DA COLLEGARE A TERESA-E
-				}
+
+					int i =JOptionPane.showConfirmDialog(null, "vuoi procedere all'ottimizzazione del del programma?", "attenzione", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+					if(i == JOptionPane.YES_OPTION){
+						setVisible(false); 
+						frame.add(new GestioneImpianto(frame));
+					}else {
+						setVisible(false); 
+						frame.add(new StatoPiante(frame));
+					}		
+			}
 		}
 		
 		//collego il listener al bottone ottimizza

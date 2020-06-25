@@ -177,44 +177,50 @@ public class Agrofarmaci extends JPanel {
 		
 		
 		//inizio elementi modificheRiportate
-			//System.out.println(farmaco);
 		modificheRiportate2Panel.setLayout(new GridLayout(3,3));
 		
-		Collections.sort(ModificaAgrofarmaci.farmaco);  // Sort cars
-	    for (String i : ModificaAgrofarmaci.farmaco) {
+			Collections.sort(ModificaAgrofarmaci.farmaco); // Sort farmaco
+			
+		    for (String i : ModificaAgrofarmaci.farmaco) {
+		    	
+		    	JCheckBox c= new JCheckBox(i);
 	    	
-	    	JCheckBox c= new JCheckBox(i);
-	    	
-	    	modificheRiportate2Panel.add(c);
-	    	modificheRiportate2Panel.add(new JLabel(""));
-	    }
-		
-		//fine elementi modificheRiportate
+		    	modificheRiportate2Panel.add(c);
+		    	modificheRiportate2Panel.add(new JLabel(""));
+		    }
+	
+		 //fine elementi modificheRiportate
 
-		//inizio bottone modificaAgro bottone
-		JButton modificaAgro=new JButton("modifica Agrofarmaci");
-		modificaAgro.setForeground(new Color(96,202,92));
-		modificaAgro.setFont(fontMedium);
-		modificaAgro.setFocusPainted(false); 
-		modificaAgro.setVisible(true);
-		
-		class modificaAgroListener implements ActionListener {
+	  //inizio bottone modificaAgro bottone
+	  		JButton modificaAgro=new JButton("modifica Agrofarmaci");
+	  		modificaAgro.setForeground(new Color(96,202,92));
+	  		modificaAgro.setFont(fontMedium);
+	  		modificaAgro.setFocusPainted(false); 
+	  		modificaAgro.setVisible(true);
+	  		
+	  		class modificaAgroListener implements ActionListener {
 
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-					JOptionPane.showMessageDialog(null,"<html>vuoi procedere<br>a modificare gli agrofarmaci?</html>","Message",1);
-					setVisible(false); //possibilita di mettere no???
-					frame.add(new ModificaAgrofarmaci(frame));
-				}
-		}
-		
-		//collego il listener al bottone ottimizza
-		ActionListener modificaAgroListener=new modificaAgroListener();
-		modificaAgro.addActionListener(modificaAgroListener);
-		modificaPanel.add(modificaAgro);
-		//fine bottone ottimizza
+	  			public void actionPerformed(ActionEvent e) {
+	  				
+	  					int i =JOptionPane.showConfirmDialog(null, "vuoi procedere a modificare gli agrofarmaci?", "attenzione", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+	  					if(i == JOptionPane.YES_OPTION){
+	  						setVisible(false); 
+	  						frame.add(new ModificaAgrofarmaci(frame));
+	  					}else {
+	  						setVisible(false); 
+	  						frame.add(new Agrofarmaci(frame));
+	  					}		
+	  				  	
+	  			}
+	  		}
+	  		
+	  		
+	  		//collego il listener al bottone ottimizza
+	  		ActionListener modificaAgroListener=new modificaAgroListener();
+	  		modificaAgro.addActionListener(modificaAgroListener);
+	  		modificaPanel.add(modificaAgro);
+	  		//fine bottone ottimizza
 
-		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
 		amministrazione.setPreferredSize(new Dimension(150,200));

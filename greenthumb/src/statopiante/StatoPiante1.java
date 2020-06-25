@@ -222,7 +222,7 @@ public class StatoPiante1 extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-					JOptionPane.showMessageDialog(null,"<html>vuoi tornare<br>allo stato delle piante?</html>","Message",1);
+					JOptionPane.showMessageDialog(null,"<html>torna a stato piante</html>","Message",1);
 					setVisible(false); //possibilita di mettere no???
 					frame.add(new StatoPiante(frame));
 				}

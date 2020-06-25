@@ -1,7 +1,8 @@
 package statopiante;
 
 import java.awt.Color;
-import java.awt.Component;
+
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -37,8 +38,8 @@ public class ScegliImpianto extends JPanel {
 	public ScegliImpianto (JFrame frame) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
-		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
-		Font font = new Font("Comic sans", Font.PLAIN, 13);
+		//Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
+		//Font font = new Font("Comic sans", Font.PLAIN, 13);
 		
 		upBarPanel=new JPanel();
 		upBarPanel.setBackground(Color.WHITE);
@@ -181,7 +182,6 @@ public class ScegliImpianto extends JPanel {
 		//fine elementi nameSectionBarPanel
 		
 		//inizio elementi imgPanel
-		JButton immagine=new JButton();
 		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
 
 		
