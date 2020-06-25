@@ -1,3 +1,4 @@
+
 package gestioneimpianto;
 
 import java.awt.Color;
@@ -20,6 +21,7 @@ import javax.swing.JTextField;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.Tester;
 import gestioneterreno.GestioneTerreno;
 import statopiante.StatoPiante;
 import utility.Impianto;
@@ -266,7 +268,9 @@ public class AggiungiImpianto extends JPanel {
 				if (j==JOptionPane.OK_OPTION) {
 					//conferma di voler aggiungere l'impianto
 					impianto=new Impianto(inputNome.getText(),inputCodice.getText(),inputVia.getText(),inputCivico.getText(),inputCitta.getText());
-					System.out.println("impianto aggiunto:" + impianto.toString());
+					Tester.addImpianto(impianto);
+					System.out.println("impianto aggiunto:" + Tester.getImpianti().toString());
+					JOptionPane.showMessageDialog(null,"<html>L'aggiunta del nuovo impianto<br>è avvenuta con successo</html>","Message",1);
 					setVisible(false);
 					frame.add(new GestioneImpianto(frame));
 				} else if (j==JOptionPane.CANCEL_OPTION) {

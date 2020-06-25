@@ -76,4 +76,12 @@ public class Tester {
 	public static ArrayList<Impianto> getImpianti(){
 		return listaImpianti;
 	}
+	
+	public static void addProgramma(ProgrammaIrrigazione programma) {
+		listaProgrammi.add(programma);
+	}
+	
+	public static void addImpianto(Impianto impianto) {
+		listaImpianti.add(impianto);
+	}
 }

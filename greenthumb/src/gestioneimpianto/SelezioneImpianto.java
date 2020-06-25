@@ -143,7 +143,7 @@ public class SelezioneImpianto extends JPanel {
 		//inizio elementi comboboxPanel
 		JComboBox<String> listaImpianti=new JComboBox<String>();
 		ArrayList<Impianto> lista=Tester.getImpianti();
-		listaImpianti.addItem(" ");
+		listaImpianti.addItem("");
 		for(Impianto i: lista) {
 			listaImpianti.addItem(i.getNome());
 		}
@@ -155,15 +155,19 @@ public class SelezioneImpianto extends JPanel {
 			public void actionPerformed(ActionEvent event) {
 			
 				String op=(String) listaImpianti.getSelectedItem();
-				Impianto impianto=null;
-				JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>" + op + "</html>","Message",1);
-				setVisible(false);
-				for(Impianto i: lista) {
-					if (i.getNome().equals(op)) {
-						impianto=i;
+				if (op.equals("")) {
+					JOptionPane.showMessageDialog(null,"<html>Seleziona un impianto<br>dalla lista</html>","Message",1);
+				} else {
+					Impianto impianto=null;
+					JOptionPane.showMessageDialog(null,"<html>Hai selezionato:<br>" + op + "</html>","Message",1);
+					setVisible(false);
+					for(Impianto i: lista) {
+						if (i.getNome().equals(op)) {
+							impianto=i;
+						}
 					}
+					frame.add(new VisualizzaProgrammiImpianto(frame,impianto,null));
 				}
-				frame.add(new VisualizzaProgrammiImpianto(frame,impianto,op));
 			}
 		}
 		ActionListener listener=new ComboListener();

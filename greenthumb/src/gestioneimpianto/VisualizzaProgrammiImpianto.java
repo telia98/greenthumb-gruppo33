@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -19,9 +20,11 @@ import javax.swing.JPanel;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.Tester;
 import gestioneterreno.GestioneTerreno;
 import statopiante.StatoPiante;
 import utility.Impianto;
+import utility.ProgrammaIrrigazione;
 
 public class VisualizzaProgrammiImpianto extends JPanel {
 
@@ -29,18 +32,19 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
 	JPanel infoPanel;
-	JPanel infoProgramma;
+	JPanel infoProgramma; //informazioni singolo programma d'irrigazione
 	JPanel downBarPanel; //barra delle icone delle sezioni
 	JPanel programmiPanel; //lista dei programmi d'irrigazione e relative informazioni
 	JPanel aggiungiPanel; //pannello per l'aggiunta di un programma alla lista di quelli dell'impianto
-	JPanel emptyPanel;
 	JPanel modificaPanel; //pannello per la modifica di un programma d'irrigazione
 	
-	public VisualizzaProgrammiImpianto(JFrame frame,Impianto impianto,String programma) {
+	public VisualizzaProgrammiImpianto(JFrame frame,Impianto impianto,ProgrammaIrrigazione programma) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
 		Font font = new Font("Comic sans", Font.PLAIN, 13);
+		
+		System.out.println(programma);
 		
 		upBarPanel=new JPanel();
 		upBarPanel.setBackground(Color.WHITE);
@@ -54,8 +58,6 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		programmiPanel.setBackground(Color.WHITE);
 		aggiungiPanel= new JPanel();
 		aggiungiPanel.setBackground(Color.WHITE);
-		emptyPanel=new JPanel();
-		emptyPanel.setBackground(Color.WHITE);
 		infoProgramma=new JPanel();
 		infoProgramma.setBackground(Color.WHITE);
 		modificaPanel=new JPanel();
@@ -132,36 +134,38 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		JLabel sectionName=new JLabel("<html><center>gestione impianto</center></html>");
 		sectionName.setFont(fontBig);
 		sectionName.setForeground(new Color(89,105,109));
-		
 		sectionName.setVisible(true);
 		nameSectionBarPanel.add(sectionName);
 		//fine elementi nameSectionBarPanel
 		
 		//inizio elementi infoPanel
-		JLabel info=new JLabel(impianto);
-		info.setFont(fontSmall);
+		JLabel info=new JLabel(impianto.getNome());
+		info.setFont(fontMedium);
 		infoPanel.add(info);
 		//fine elementi infoPanel
 		
 		//inizio elementi programmiPanel
-		JLabel selection=new JLabel("Programma selezionato: ");
+		JLabel selection=new JLabel("<html>Seleziona dalla lista il programma d'irrigazione<br>di cui vuoi visualizzare i dettagli</html>");
+		selection.setFont(font);
+		selection.setForeground(new Color(89,105,109));
 		JComboBox<String> comboprogrammi=new JComboBox<String>();
-		comboprogrammi.addItem("programma 1");
-		comboprogrammi.addItem("programma 2");
+		comboprogrammi.addItem("");
+		ArrayList<ProgrammaIrrigazione> lista=Tester.getProgrammi();
+		for(ProgrammaIrrigazione p: lista) {
+			if (p.getImpianto().getNome().equals(impianto.getNome()))
+				comboprogrammi.addItem(p.getNome());
+		}
+		
 		class ComboListener implements ActionListener {
 			
 			public void actionPerformed(ActionEvent event) {
 			
 				String op=(String) comboprogrammi.getSelectedItem();
-				
-				if (op.equals("programma 1")) {
-					setVisible(false);
-					frame.add(new VisualizzaProgrammiImpianto(frame,impianto,"programma 1"));
-				}
-				
-				if (op.equals("programma 2")) {
-					setVisible(false);
-					frame.add(new VisualizzaProgrammiImpianto(frame,impianto,"programma 2"));
+				for(ProgrammaIrrigazione p: lista) {
+					if (p.getNome().equals(op)) {
+						setVisible(false);
+						frame.add(new VisualizzaProgrammiImpianto(frame,impianto,p));
+					}
 				}
 			}
 		}
@@ -173,35 +177,71 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		//fine elementi programmiPanel
 		
 		//inizio elementi infoProgramma
-		JLabel getto=new JLabel("<html><center>potenza getto d'acqua: 12</center></html>");
-		JLabel rotazioneGetto=new JLabel("<html><center>rotazione getto: ON</center></html>");
-		JLabel hInizio=new JLabel("<html><center>orario inizio irrigazione: 06:00 AM</center></html>");
-		JLabel hFine=new JLabel("<html><center>orario fine irrigazione: 08:00 AM</center></html>");
-		JLabel tipologia=new JLabel("<html><center>Tipologia irrigazione: a getto continuo</center></html>");
+		JLabel dettagliProgramma = new JLabel();
 		
-		infoProgramma.setLayout(new GridLayout(5,1));
-		infoProgramma.add(getto);
-		infoProgramma.add(rotazioneGetto);
-		infoProgramma.add(hInizio);
-		infoProgramma.add(hFine);
-		infoProgramma.add(tipologia);
+		if (programma!=null) {
+			String prog="<html>Programma: " + programma.getNome() + "<br>Tipologia: " + programma.getTipologia() + "<br>Potenza: " + String.valueOf(programma.getPotenzaGetto()) + " e rotazione: ";
+			Boolean rotazione=programma.isRotazioneGetto();
+			if (rotazione!=false)
+				prog+="ON<br>";
+			else
+				prog+="OFF<br>";
+			prog+="Orario irrigazione: " + programma.getOraInizio().toString() + " - " + programma.getOraFine().toString() + "</html>";
+			dettagliProgramma.setText(prog);
+		
+			infoProgramma.add(dettagliProgramma);
+		} else {
+			dettagliProgramma=new JLabel("");
+			infoProgramma.add(dettagliProgramma);
+		}
 		//fine elementi infoProgramma
 
 		//inizio elementi modificaPanel
-		JButton modificaProgramma=new JButton("modifica programma d'irrigazione");
-		modificaProgramma.setForeground(new Color(89,105,109));
-		modificaProgramma.setFont(fontMedium);
-		modificaProgramma.setFocusPainted(false); 
-		modificaProgramma.setVisible(true);
-		modificaPanel.add(modificaProgramma);
+		if (programma!=null) {
+			JButton modificaProgramma=new JButton("modifica programma d'irrigazione");
+			
+			class ModificaListener implements ActionListener {
+				
+				public void actionPerformed(ActionEvent event) {
+					setVisible(false);
+					frame.add(new ImpostazioniProgramma(frame,impianto,programma));
+				}
+			}
+			ActionListener modificalistener=new ModificaListener();
+			modificaProgramma.addActionListener(modificalistener);	
+			
+			modificaProgramma.setForeground(new Color(89,105,109));
+			modificaProgramma.setFont(fontMedium);
+			modificaProgramma.setFocusPainted(false); 
+			modificaProgramma.setVisible(true);
+			modificaPanel.add(modificaProgramma);
+		} else {
+			JLabel label=new JLabel("");
+			modificaPanel.add(label);
+		}
 		//fine elementi modificaPanel
 		
 		//inizio elementi aggiungiPanel
+		JLabel dettagli=new JLabel("<html><center>Clicca il bottone per aggiungere<br>un nuovo programma d'irrigazione</center></html>");
+		dettagli.setFont(font);
+		dettagli.setForeground(new Color(89,105,109));
 		JButton aggiungi=new JButton("aggiungi nuovo programma");
+		
+		class AggiungiListener implements ActionListener {
+			
+			public void actionPerformed(ActionEvent event) {
+				setVisible(false);
+				frame.add(new ImpostazioniProgramma(frame,impianto,null));
+			}
+		}
+		ActionListener aggiungilistener=new AggiungiListener();
+		aggiungi.addActionListener(aggiungilistener);	
+		
 		aggiungi.setForeground(new Color(89,105,109));
 		aggiungi.setFont(fontMedium);
 		aggiungi.setFocusPainted(false); 
 		aggiungi.setVisible(true);
+		aggiungiPanel.add(dettagli);
 		aggiungiPanel.add(aggiungi);
 		//fine elementi aggiungiPanel
 		
@@ -317,19 +357,17 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		programmiPanel.setVisible(true);
 		aggiungiPanel.setVisible(true);
 		downBarPanel.setVisible(true);
-		emptyPanel.setVisible(true);
 		infoProgramma.setVisible(true);
 		modificaPanel.setVisible(true);
 		
-		setLayout(new GridLayout(9,1));
+		setLayout(new GridLayout(8,1));
 		add(upBarPanel);
 		add(nameSectionBarPanel);
 		add(infoPanel);
+		add(aggiungiPanel);
 		add(programmiPanel);
 		add(infoProgramma);
 		add(modificaPanel);
-		add(emptyPanel);
-		add(aggiungiPanel);
 		add(downBarPanel);
 	}
 }
