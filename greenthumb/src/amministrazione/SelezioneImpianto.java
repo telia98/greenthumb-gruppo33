@@ -138,16 +138,19 @@ public class SelezioneImpianto extends JPanel {
 		class ComboListener implements ActionListener{
 			public void actionPerformed(ActionEvent event) {
 				String n= (String) selezioneImpianto.getSelectedItem();
-				ArrayList<Impianto> listaImpianti= Tester.getImpianti();
-				for(Impianto i: listaImpianti) {
-					if(i.getNome().equals(n)) {
-						JOptionPane.showMessageDialog(null,"<html> Impianto selezionato:<br>" + n + "</html", "Message", 1);
-						setVisible(false);
-						
-						frame.add(new SelezioneImp1(frame,i));
-					}
-				}
-					
+				if (n.equals("")) {
+					JOptionPane.showMessageDialog(null,"<html>Seleziona un impianto<br>dalla lista</html>","Message",1);
+				} else {
+					ArrayList<Impianto> listaImpianti= Tester.getImpianti();
+					for(Impianto i: listaImpianti) {
+						if(i.getNome().equals(n)) {
+							JOptionPane.showMessageDialog(null,"<html> Impianto selezionato:<br>" + n + "</html", "Message", 1);
+							setVisible(false);
+							
+							frame.add(new SelezioneImp1(frame,i));
+						}
+					}	
+				}	
 			}
 		}
 		

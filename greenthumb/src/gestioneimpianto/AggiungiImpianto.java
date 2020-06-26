@@ -131,7 +131,6 @@ public class AggiungiImpianto extends JPanel {
 		
 		//inizio elementi infoPanel
 		JLabel info=new JLabel("<html><center>Inserisci i dati indicati<br>per registrare il tuo impianto d'irrigazione<br>al sistema GreenThumb</center></html>");
-		info.setForeground(new Color(89,105,109));
 		infoPanel.add(info);
 		//fine elementi infoPanel
 		
@@ -207,7 +206,6 @@ public class AggiungiImpianto extends JPanel {
 		
 		//inizio elementi posImpiantoPanel
 		JLabel locazione=new JLabel("<html><center>Inserisci l'indirizzo<br>dove sarà locato l'impianto</center></html>");
-		locazione.setForeground(new Color(89,105,109));
 		posImpiantoPanel.add(locazione);
 		//fine elementi posImpiantoPanel
 		

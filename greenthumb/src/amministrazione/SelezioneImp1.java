@@ -157,15 +157,13 @@ public class SelezioneImp1 extends JPanel {
 		button.addActionListener(
 			    new ActionListener() {
 			        public void actionPerformed(ActionEvent e) {
-			        	JOptionPane.showMessageDialog(null,"<html> PARAMETRO NUMERICO<br>entro il quale<br>far rientrare i costi<br>dell'attività d'irrigazione</html", "Message", 1);
+			        	JOptionPane.showMessageDialog(null,"<html> Parametro numerico<br>entro il quale<br>far rientrare i costi<br>dell'attività d'irrigazione</html", "Message", 1);
 						setVisible(true);
 						frame.add(new SelezioneImp1(frame, impianto));
 			        }
 			    }
 			);
-		
-
-		
+	
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
 		amministrazione.setPreferredSize(new Dimension(150,200));

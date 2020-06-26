@@ -139,7 +139,6 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		//inizio elementi programmiPanel
 		JLabel selection=new JLabel("<html>Seleziona dalla lista il programma d'irrigazione<br>di cui vuoi visualizzare i dettagli</html>");
 		selection.setFont(font);
-		selection.setForeground(new Color(89,105,109));
 		JComboBox<String> comboprogrammi=new JComboBox<String>();
 		comboprogrammi.addItem("");
 		ArrayList<ProgrammaIrrigazione> lista=Tester.getProgrammi();
@@ -216,7 +215,6 @@ public class VisualizzaProgrammiImpianto extends JPanel {
 		//inizio elementi aggiungiPanel
 		JLabel dettagli=new JLabel("<html><center>Clicca il bottone per aggiungere<br>un nuovo programma d'irrigazione</center></html>");
 		dettagli.setFont(font);
-		dettagli.setForeground(new Color(89,105,109));
 		JButton aggiungi=new JButton("aggiungi nuovo programma");
 		
 		class AggiungiListener implements ActionListener {

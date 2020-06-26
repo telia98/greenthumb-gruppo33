@@ -165,6 +165,9 @@ public class ImpostaTimer extends JPanel {
 				
 				//inizio elementi bottonePanel
 				JButton bott = new JButton("Imposta"); 
+				bott.setForeground(new Color(0,138,177));
+				bott.setFont(fontMedium);
+				bott.setFocusPainted(false); 
 				bott.setVisible(true);
 				bottonePanel.add(bott);
 				

@@ -131,7 +131,6 @@ public class GestioneTerreno extends JPanel {
 		
 		//inizio elementi imgPanel
 		JButton immagine=new JButton();
-		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
 
 		try {
 			Image img=ImageIO.read(new File("img/manoAcqua.png"));

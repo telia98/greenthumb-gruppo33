@@ -167,11 +167,15 @@ public class SelezionaImpiantoGT extends JPanel {
 					public void actionPerformed(ActionEvent event) {
 						
 						String n=(String) selezioneImpianto.getSelectedItem();
-						for(Impianto i: lista) {
-							if (i.getNome().equals(n)) {
-								JOptionPane.showMessageDialog(null, "<html>Hai selezionato:<br>"+n +"</html>","Message",1);
-								setVisible(false);
-								frame.add(new ModalitaIrrigazione(frame, i)); 	
+						if (n.equals("")) {
+							JOptionPane.showMessageDialog(null,"<html>Seleziona un impianto<br>dalla lista</html>","Message",1);
+						} else {
+							for(Impianto i: lista) {
+								if (i.getNome().equals(n)) {
+									JOptionPane.showMessageDialog(null, "<html>Hai selezionato:<br>"+ n +"</html>","Message",1);
+									setVisible(false);
+									frame.add(new ModalitaIrrigazione(frame, i)); 	
+								}
 							}
 						}
 					}

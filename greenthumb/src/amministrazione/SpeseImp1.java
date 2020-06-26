@@ -137,15 +137,13 @@ public class SpeseImp1 extends JPanel {
 		button1.setForeground(new Color(230,202,60));
 		contenutoPanel.add(button1);
 		
-		button1.addActionListener(
-				new ActionListener() {
-			        public void actionPerformed(ActionEvent e) {
-			        	JOptionPane.showMessageDialog(null,"<html> parametro budget disattivato </html", "Message", 1);
-						setVisible(false);
-						frame.add(new SelezioneImp1(frame, impianto));
-			        }
-			    } 
-			);
+		button1.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"<html> parametro budget disattivato </html", "Message", 1);
+				setVisible(false);
+				frame.add(new SelezioneImp1(frame, impianto));
+			}
+		});
 		//fine elementi contenutoPanel
 		
 		
@@ -161,6 +159,7 @@ public class SpeseImp1 extends JPanel {
 		
 		JButton button2= new JButton("PROCEDI");
 		button2.setForeground(new Color(230,202,60));
+		button2.setFocusable(false);
 		contenuto2Panel.add(button2);
 		
 		button2.addActionListener(new ActionListener() {
@@ -169,21 +168,24 @@ public class SpeseImp1 extends JPanel {
 	    		int etad = 0;
 	    		try {
 	    			etas = etat.getText();
-	    			etad = Integer.parseInt(etas);
+	    			if(!etas.equals("")) {
+	    				etad = Integer.parseInt(etas);
+	    				
+	    	    		int bolletta= 1000;
+			        	
+	    	    		if(bolletta <= etad) { 
+	    	    				JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
+	    	    				setVisible(false);
+	    	    				frame.add(new SegnaleVerdeImp1(frame, impianto));
+	    	    		} else if(bolletta > etad)  {
+	    	    			    JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
+	    	    				setVisible(false);
+	    	    				frame.add(new SegnaleRossoImp1(frame, impianto));
+	    	    		}
+	    			} else
+	    				JOptionPane.showMessageDialog(null,"<html>Inserire un valore numerico<br>nell'apposito campo.<br>Altrimenti, disattivare<br>il budget</html>");
 	    		} catch (Exception ex) {
 	    			ex.printStackTrace();
-	    		}
-	    			 	        	
-	    		int bolletta= 1000;
-	    			        	
-	    		if(bolletta <= etad) { 
-	    				JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
-	    				setVisible(false);
-	    				frame.add(new SegnaleVerdeImp1(frame, impianto));
-	    		} else if(bolletta > etad)  {
-	    			    JOptionPane.showMessageDialog(null,"<html> budget inserito </html", "Message", 1);
-	    				setVisible(false);
-	    				frame.add(new SegnaleRossoImp1(frame, impianto));
 	    		}
 	    	 }
 	    });    

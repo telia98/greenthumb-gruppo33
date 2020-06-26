@@ -110,7 +110,6 @@ public class ScegliImpianto extends JPanel {
 				
 		//inizio elementi infoPanel
 		JLabel message2=new JLabel("<html><center>Seleziona l'impianto di cui<br>vuoi aggiungere gli agrofarmaci</center></html>");
-		message2.setForeground(new Color(96,202,92));
 		contenutoPanel.add(message2);
 		//fine elementi infoPanel
 				
@@ -129,9 +128,12 @@ public class ScegliImpianto extends JPanel {
 			public void actionPerformed(ActionEvent event) {
 					
 				String op=(String) listaImpianti.getSelectedItem();
-				
-				setVisible(false);
-				frame.add(new Agrofarmaci(frame));
+				if (op.equals("")) {
+					JOptionPane.showMessageDialog(null,"<html>Seleziona un impianto<br>dalla lista</html>","Message",1);
+				} else {
+					setVisible(false);
+					frame.add(new Agrofarmaci(frame));
+				}
 			}
 		}
 		ActionListener listener=new ComboListener();
@@ -139,7 +141,7 @@ public class ScegliImpianto extends JPanel {
 		//fine elementi comboboxPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName1=new JLabel("<html><center>Scegli Impianto</center></html>");
+		JLabel sectionName1=new JLabel("<html><center>Seleziona impianto</center></html>");
 		sectionName1.setFont(fontBig);
 		sectionName1.setForeground(new Color(96,202,92));
 		

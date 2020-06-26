@@ -162,11 +162,10 @@ public class SegnaleVerdeImp1 extends JPanel {
 		//fine elementi imgPanel
 		
 		//inizio buttonPanel
-		JButton gotoAmministrazione=new JButton("TORNA AD AMMINISTRAZIONE");
+		JButton gotoAmministrazione=new JButton("Torna ad amministrazione");
 		gotoAmministrazione.setFocusPainted(false);
 		gotoAmministrazione.setForeground(new Color(230,202,60));
-		gotoAmministrazione.setBorder(null); 
-		gotoAmministrazione.setFont(font);
+		gotoAmministrazione.setFont(fontMedium);
 		
 		buttonPanel.add(gotoAmministrazione);
 		

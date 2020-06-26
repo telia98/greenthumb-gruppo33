@@ -161,7 +161,9 @@ public class ModalitaIrrigazione extends JPanel {
 				both.add(manuale);
 				
 				JButton conferma= new JButton("Conferma");
-				
+				conferma.setForeground(new Color(0,138,177));
+				conferma.setFont(fontMedium);
+				conferma.setFocusPainted(false);
 
 				automaticaPanel.add(automatica);
 				manualePanel.add(manuale);

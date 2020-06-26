@@ -44,7 +44,7 @@ public class ModalitaAutomatica extends JPanel{
 	
 	public ModalitaAutomatica(JFrame frame,Impianto impianto, ProgrammaIrrigazione pr) {
 	System.out.println(pr);	
-		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
+		Font fontBig = new Font("Herculanum", Font.BOLD, 28);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
 		Font font = new Font("Comic sans", Font.PLAIN, 13);
@@ -134,7 +134,7 @@ public class ModalitaAutomatica extends JPanel{
 		//fine elementi upBarPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName=new JLabel("<html><center>Modalit� automatica</center></html>");
+		JLabel sectionName=new JLabel("<html><center>Modalita' automatica</center></html>");
 		sectionName.setFont(fontBig);
 		sectionName.setForeground(new Color(0,138,177));
 		
@@ -224,6 +224,9 @@ public class ModalitaAutomatica extends JPanel{
 	
 		//inizio elementi attivaPanel
 		JButton attiva = new JButton("Attiva ora"); 	
+		attiva.setForeground(new Color(0,138,177));
+		attiva.setFont(fontMedium);
+		attiva.setFocusPainted(false); 
 		attivaPanel.add(attiva);
 		
 		class ButtonListener implements ActionListener {

@@ -40,7 +40,7 @@ public class SegnaleRossoImp1 extends JPanel {
 	public SegnaleRossoImp1(JFrame frame, Impianto impianto) {
 		Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
-		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
+		Font fontMedium = new Font("Herculanum", Font.BOLD, 20);
 		Font font = new Font("Comic sans", Font.PLAIN, 13);
 		
 		upBarPanel=new JPanel();
@@ -164,11 +164,10 @@ public class SegnaleRossoImp1 extends JPanel {
 		//fine elementi imgPanel
 		
 		//inizio buttonPanel
-		JButton gotoAmministrazione=new JButton("OTTIMIZZA");
+		JButton gotoAmministrazione=new JButton("Ottimizza");
 		gotoAmministrazione.setFocusPainted(false);
 		gotoAmministrazione.setForeground(new Color(230,202,60));
-		gotoAmministrazione.setBorder(null); 
-		gotoAmministrazione.setFont(font);
+		gotoAmministrazione.setFont(fontMedium);
 		
 		buttonPanel.add(gotoAmministrazione);
 		

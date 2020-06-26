@@ -110,7 +110,6 @@ public class SelezioneImpianto extends JPanel {
 				
 		//inizio elementi infoPanel
 		JLabel message2=new JLabel("<html><center>Seleziona l'impianto di cui<br>vuoi controllarne lo stato delle piante</center></html>");
-		message2.setForeground(new Color(96,202,92));
 		contenutoPanel.add(message2);
 		//fine elementi infoPanel
 				
@@ -150,18 +149,13 @@ public class SelezioneImpianto extends JPanel {
 		//fine elementi comboboxPanel
 		
 		//inizio elementi nameSectionBarPanel
-		JLabel sectionName1=new JLabel("<html><center>Scegli Impianto</center></html>");
+		JLabel sectionName1=new JLabel("<html><center>Seleziona Impianto</center></html>");
 		sectionName1.setFont(fontBig);
 		sectionName1.setForeground(new Color(96,202,92));
 		
 		sectionName1.setVisible(true);
 		nameSectionBarPanel.add(sectionName1);
 		//fine elementi nameSectionBarPanel
-		
-		//inizio elementi imgPanel
-		//JButton immagine=new JButton();
-		//immagine.setPreferredSize(new Dimension(400,400)); //qui puoi settare le dimensioni del tuo pulsante , la foto si adattera (Se però le proporzioni non sono giuste si deforma anche)
-
 		
 		//inizio elementi downBarPanel
 		JButton amministrazione=new JButton();
