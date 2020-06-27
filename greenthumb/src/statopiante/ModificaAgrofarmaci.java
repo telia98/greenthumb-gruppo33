@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 
 import amministrazione.Amministrazione;
 import general.Homepage;
+import general.MenuPrincipale;
 import gestioneimpianto.GestioneImpianto;
 import gestioneterreno.GestioneTerreno;
 
@@ -93,7 +94,7 @@ public class ModificaAgrofarmaci extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				setVisible(false); //rendo invisibile il pannello del login
-				frame.add(new Homepage(frame)); //aggiungiamo al frame il pannello della homepage
+				frame.add(new MenuPrincipale(frame)); //aggiungiamo al frame il pannello della homepage
 			}
 		}
 		
