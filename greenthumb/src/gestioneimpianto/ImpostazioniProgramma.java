@@ -300,16 +300,21 @@ public class ImpostazioniProgramma extends JPanel {
 							ti=radioTipo1.getText();
 						else
 							ti=radioTipo2.getText();
-						ProgrammaIrrigazione modificato=new ProgrammaIrrigazione(impianto,np,pg,rg,io,fo,ti);
-						System.out.println(modificato);
-						Tester.getProgrammi().remove(programma);
-						System.out.println(Tester.getProgrammi());
-						Tester.addProgramma(modificato);
-						System.out.println(Tester.getProgrammi());
 						
-						JOptionPane.showMessageDialog(null,"<html>La modifica<br>del programma d'irrigazione<br>è avvenuta con successo</html>","Message",1);
-						setVisible(false);
-						frame.add(new VisualizzaProgrammiImpianto(frame,modificato.getImpianto(),modificato));
+						if (np.equals("") || pg==0 || io.equals("") || fo.equals("") || ti.equals("")) 
+							JOptionPane.showMessageDialog(null,"<html>E' necessario settare<br>tutte le impostazioni<br>del programma</html>","Message",1);
+						else {
+							ProgrammaIrrigazione modificato=new ProgrammaIrrigazione(impianto,np,pg,rg,io,fo,ti);
+							System.out.println(modificato);
+							Tester.getProgrammi().remove(programma);
+							System.out.println(Tester.getProgrammi());
+							Tester.addProgramma(modificato);
+							System.out.println(Tester.getProgrammi());
+						
+							JOptionPane.showMessageDialog(null,"<html>La modifica<br>del programma d'irrigazione<br>è avvenuta con successo</html>","Message",1);
+							setVisible(false);
+							frame.add(new VisualizzaProgrammiImpianto(frame,modificato.getImpianto(),modificato));
+						}
 					}
 				}
 			}
@@ -330,7 +335,11 @@ public class ImpostazioniProgramma extends JPanel {
 					int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler salvare<br>il programma d'irrigazione<br>appena inserito?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 					if (j==JOptionPane.OK_OPTION) {
 						String np=inputNome.getText();
-						int pg=Integer.parseInt(inputGetto.getText());
+						int pg;
+						if (inputGetto.getText().equals(""))
+							pg=0;
+						else
+							pg=Integer.parseInt(inputGetto.getText());
 						boolean rg=false;
 						if (onOff.isSelected())
 							rg=true;
@@ -347,14 +356,19 @@ public class ImpostazioniProgramma extends JPanel {
 							ti=radioTipo1.getText();
 						else
 							ti=radioTipo2.getText();
-						ProgrammaIrrigazione programma=new ProgrammaIrrigazione(impianto,np,pg,rg,io,fo,ti);
-						System.out.println(programma);
-						Tester.addProgramma(programma);
-						System.out.println(Tester.getProgrammi());
 						
-						JOptionPane.showMessageDialog(null,"<html>Il programma d'irrigazione<br>è stato inserito con successo</html>","Message",1);
-						setVisible(false);
-						frame.add(new VisualizzaProgrammiImpianto(frame,programma.getImpianto(),programma));
+						if (np.equals("") || pg==0 || io.equals("") || fo.equals("") || ti.equals("")) 
+							JOptionPane.showMessageDialog(null,"<html>E' necessario settare<br>tutte le impostazioni<br>del programma</html>","Message",1);
+						else {
+							ProgrammaIrrigazione programma=new ProgrammaIrrigazione(impianto,np,pg,rg,io,fo,ti);
+							System.out.println(programma);
+							Tester.addProgramma(programma);
+							System.out.println(Tester.getProgrammi());
+							
+							JOptionPane.showMessageDialog(null,"<html>Il programma d'irrigazione<br>è stato inserito con successo</html>","Message",1);
+							setVisible(false);
+							frame.add(new VisualizzaProgrammiImpianto(frame,programma.getImpianto(),programma));
+							}
 					} else {
 						setVisible(false);
 						frame.add(new VisualizzaProgrammiImpianto(frame,impianto,null));

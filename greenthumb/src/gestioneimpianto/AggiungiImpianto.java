@@ -245,12 +245,16 @@ public class AggiungiImpianto extends JPanel {
 				int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler aggiungere<br>l'impianto al sistema?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 				if (j==JOptionPane.OK_OPTION) {
 					//conferma di voler aggiungere l'impianto
-					impianto=new Impianto(inputNome.getText(),inputCodice.getText(),inputVia.getText(),inputCivico.getText(),inputCitta.getText());
-					Tester.addImpianto(impianto);
-					System.out.println("impianto aggiunto:" + Tester.getImpianti().toString());
-					JOptionPane.showMessageDialog(null,"<html>L'aggiunta del nuovo impianto<br>è avvenuta con successo</html>","Message",1);
-					setVisible(false);
-					frame.add(new GestioneImpianto(frame));
+					if (inputNome.getText().equals("") || inputCodice.getText().equals("") || inputVia.getText().equals("") || inputCivico.getText().equals("") || inputCitta.getText().equals("")) 
+						JOptionPane.showMessageDialog(null,"<html>E' necessario compilare<br>tutti i campi del form</html>","Warning",1);
+					else {
+						impianto=new Impianto(inputNome.getText(),inputCodice.getText(),inputVia.getText(),inputCivico.getText(),inputCitta.getText()); 
+						Tester.addImpianto(impianto);
+						System.out.println("impianto aggiunto:" + Tester.getImpianti().toString());
+						JOptionPane.showMessageDialog(null,"<html>L'aggiunta del nuovo impianto<br>è avvenuta con successo</html>","Message",1);
+						setVisible(false);
+						frame.add(new GestioneImpianto(frame));
+					}
 				} else if (j==JOptionPane.CANCEL_OPTION) {
 					//rimango alla schermata attuale senza apportare modifiche
 				} else {
