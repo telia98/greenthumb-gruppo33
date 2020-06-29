@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.imageio.ImageIO;
@@ -28,6 +29,8 @@ import statopiante.ModificaAgrofarmaci;
 
 public class Agrofarmaci extends JPanel {
 	private static final long serialVersionUID = 1L;
+	public static ArrayList<String> farmaco = new ArrayList<String>();
+	
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
 	JPanel modificheRiportatePanel; //contenuto seconda parte della schermata
@@ -40,7 +43,7 @@ public class Agrofarmaci extends JPanel {
 		//Font fontBig = new Font("Herculanum", Font.BOLD, 30);
 		Font fontSmall=new Font("Herculanum", Font.PLAIN, 10);
 		Font fontMedium = new Font("Herculanum", Font.BOLD, 16);
-		//Font font = new Font("Comic sans", Font.PLAIN, 13);
+		Font font = new Font("Comic sans", Font.PLAIN, 13);
 		
 		upBarPanel=new JPanel();
 		upBarPanel.setBackground(Color.WHITE);
@@ -153,14 +156,21 @@ public class Agrofarmaci extends JPanel {
 		
 		modificheRiportatePanel.add(testo);
 		//fine elementi imgPanel
-		
+		if (farmaco.size() == 0) {
+			JLabel testo2=new JLabel("<html><center><br>non risulta essere stato aggiunto <br> nessun tipo di agrofarmaco durante l' irrigazione</center></html>");
+			testo2.setFont(font);
+			testo2.setForeground(new Color(0,0,0));
+			testo2.setVisible(true);
+			
+			modificheRiportatePanel.add(testo2);
+		}
 		
 		
 		//inizio elementi modificheRiportate
 		modificheRiportate2Panel.setLayout(new GridLayout(3,3));
 		
-		Collections.sort(ModificaAgrofarmaci.farmaco); // Sort farmaco
-		for (String i : ModificaAgrofarmaci.farmaco) {
+		Collections.sort(farmaco); // Sort farmaco
+		for (String i : farmaco) {
 			JCheckBox c= new JCheckBox(i);
 		    c.setEnabled(false);
 		    modificheRiportate2Panel.add(new JLabel(""));

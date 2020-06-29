@@ -31,7 +31,6 @@ public class ModificaAgrofarmaci extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static ArrayList<String> farmaco = new ArrayList<String>();
 	JPanel upBarPanel; //barra con il logo e il bottone di uscita
 	JPanel nameSectionBarPanel; //barra con il nome della sezione
 	JPanel miscelaAgrofarmaciPanel; //contenuto seconda parte della schermata
@@ -150,13 +149,13 @@ public class ModificaAgrofarmaci extends JPanel {
 		
 	        
 	        if(enovit.isSelected()){  
-	            farmaco.add("enovit");
+	            Agrofarmaci.farmaco.add("enovit");
 	        }  
 	        if(contraxs.isSelected()){  
-	        	farmaco.add("contraxs stange");
+	        	Agrofarmaci.farmaco.add("contraxs stange");
 	        }  
 	        if(quintamon.isSelected()){  
-	        	farmaco.add("quintamon");
+	        	Agrofarmaci.farmaco.add("quintamon");
 	        }  
 		//fine elementi miscelaAgrofarmaci
 		
@@ -177,13 +176,13 @@ public class ModificaAgrofarmaci extends JPanel {
 		
 		 
 	        if(ziram.isSelected()){  
-	        	farmaco.add("ziram 80");
+	        	Agrofarmaci.farmaco.add("ziram 80");
 	        }  
 	        if(diledit.isSelected()){  
-	        	farmaco.add("ziram 80");
+	        	Agrofarmaci.farmaco.add("ziram 80");
 	        }  
 	        if(bromcid.isSelected()){  
-	        	farmaco.add("ziram 80");
+	        	Agrofarmaci.farmaco.add("ziram 80");
 	        }  
 		//fine elementi miscelaAgrofarmaci2
 	
@@ -202,22 +201,22 @@ public class ModificaAgrofarmaci extends JPanel {
 				int j=JOptionPane.showConfirmDialog(null,"<html>Confermi di voler modificare<br>la miscela di agrofarmaci?</html>","Attenzione!",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 				if (j==JOptionPane.OK_OPTION) {
 					if(enovit.isSelected()){  
-						farmaco.add("enovit");
+						Agrofarmaci.farmaco.add("enovit");
 					}  
 					if(contraxs.isSelected()){  
-						farmaco.add("contraxs stange");
+						Agrofarmaci.farmaco.add("contraxs stange");
 					}  
 					if(quintamon.isSelected()){  
-						farmaco.add("quintamon");
+						Agrofarmaci.farmaco.add("quintamon");
 					}  
 					if(ziram.isSelected()){  
-						farmaco.add("ziram 80");
+						Agrofarmaci.farmaco.add("ziram 80");
 					} 	 
 					if(diledit.isSelected()){  
-						farmaco.add("ziram 80");
+						Agrofarmaci.farmaco.add("ziram 80");
 					}  
 					if(bromcid.isSelected()){  
-						farmaco.add("ziram 80");
+						Agrofarmaci.farmaco.add("ziram 80");
 					}  
 					JOptionPane.showMessageDialog(null,"<html>La miscela di agrofarmaci<br>è stata modificata<br>con successo</html>","Message",1);
 					setVisible(false);
