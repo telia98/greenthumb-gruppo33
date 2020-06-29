@@ -311,7 +311,7 @@ public class ImpostazioniProgramma extends JPanel {
 							Tester.addProgramma(modificato);
 							System.out.println(Tester.getProgrammi());
 						
-							JOptionPane.showMessageDialog(null,"<html>La modifica<br>del programma d'irrigazione<br>è avvenuta con successo</html>","Message",1);
+							JOptionPane.showMessageDialog(null,"<html>La modifica<br>del programma d'irrigazione<br>è avvenuta con successo<br><br>Per attivarlo<br>proseguire nella sezione<br>'Gestione terreno' all'opzione<br>irrigazione automatica</html>","Message",1);
 							setVisible(false);
 							frame.add(new VisualizzaProgrammiImpianto(frame,modificato.getImpianto(),modificato));
 						}
@@ -365,7 +365,7 @@ public class ImpostazioniProgramma extends JPanel {
 							Tester.addProgramma(programma);
 							System.out.println(Tester.getProgrammi());
 							
-							JOptionPane.showMessageDialog(null,"<html>Il programma d'irrigazione<br>è stato inserito con successo</html>","Message",1);
+							JOptionPane.showMessageDialog(null,"<html>Il programma d'irrigazione<br>è stato inserito con successo<br><br>Per attivarlo<br>proseguire nella sezione<br>'Gestione terreno' all'opzione<br>irrigazione automatica</html>","Message",1);
 							setVisible(false);
 							frame.add(new VisualizzaProgrammiImpianto(frame,programma.getImpianto(),programma));
 							}
